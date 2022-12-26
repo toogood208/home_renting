@@ -3,7 +3,6 @@ import 'package:home_renting/core/models/home_model.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/home/home_view_model.dart';
-import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:stacked/stacked.dart';
 
 class DetailView extends StatelessWidget {
