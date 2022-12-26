@@ -1,3 +1,4 @@
+import 'package:home_renting/core/services/authentication_service.dart';
 import 'package:home_renting/core/services/home_service.dart';
 import 'package:home_renting/ui/views/detail/detail_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
@@ -9,6 +10,8 @@ import 'package:stacked_services/stacked_services.dart';
   AdaptiveRoute(page: DetailView)
 ], dependencies: [
   LazySingleton(classType: NavigationService),
-  LazySingleton(classType: HomeService)
+  LazySingleton(classType: HomeService),
+  LazySingleton(classType: DialogService),
+  LazySingleton(classType: AuthenticationService)
 ], logger: StackedLogger())
 class App {}
