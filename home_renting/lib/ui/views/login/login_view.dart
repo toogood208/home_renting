@@ -12,6 +12,8 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return ViewModelBuilder<LoginViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
@@ -23,12 +25,14 @@ class LoginView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 47),
-                const CustomTextField(
+                CustomTextField(
+                  controller: emailController,
                   title: "Enter Email",
                   textInputType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
+                  controller: passwordController,
                   title: "Enter Password",
                   textInputType: TextInputType.visiblePassword,
                   obscureText: model.passwordVisible,
@@ -61,7 +65,12 @@ class LoginView extends StatelessWidget {
                 const SizedBox(height: 24),
                 CustomButton(
                   title: "Login",
-                  onTap: () {},
+                  onTap: () {
+                    model.loin(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
+                  },
                 )
               ],
             ),

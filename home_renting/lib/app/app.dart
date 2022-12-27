@@ -4,11 +4,13 @@ import 'package:home_renting/ui/views/detail/detail_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/login/login_view.dart';
 import 'package:home_renting/ui/views/signup/signup_view.dart';
+import 'package:home_renting/ui/views/startup_view/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 @StackedApp(routes: [
-  AdaptiveRoute(page: LoginView, initial: true),
+  AdaptiveRoute(page: StartUpView, initial: true),
+  AdaptiveRoute(page: LoginView),
   AdaptiveRoute(page: SignupView),
   AdaptiveRoute(page: Home),
   AdaptiveRoute(page: DetailView),

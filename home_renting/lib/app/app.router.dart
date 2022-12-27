@@ -5,18 +5,21 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i6;
+import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/material.dart';
-import 'package:home_renting/core/models/home_model.dart' as _i7;
-import 'package:home_renting/ui/views/detail/detail_view.dart' as _i5;
-import 'package:home_renting/ui/views/home/home_view.dart' as _i4;
-import 'package:home_renting/ui/views/login/login_view.dart' as _i2;
-import 'package:home_renting/ui/views/signup/signup_view.dart' as _i3;
+import 'package:home_renting/core/models/home_model.dart' as _i8;
+import 'package:home_renting/ui/views/detail/detail_view.dart' as _i6;
+import 'package:home_renting/ui/views/home/home_view.dart' as _i5;
+import 'package:home_renting/ui/views/login/login_view.dart' as _i3;
+import 'package:home_renting/ui/views/signup/signup_view.dart' as _i4;
+import 'package:home_renting/ui/views/startup_view/startup_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i8;
+import 'package:stacked_services/stacked_services.dart' as _i9;
 
 class Routes {
-  static const loginView = '/';
+  static const startUpView = '/';
+
+  static const loginView = '/login-view';
 
   static const signupView = '/signup-view';
 
@@ -25,6 +28,7 @@ class Routes {
   static const detailView = '/detail-view';
 
   static const all = <String>{
+    startUpView,
     loginView,
     signupView,
     home,
@@ -35,46 +39,56 @@ class Routes {
 class StackedRouter extends _i1.RouterBase {
   final _routes = <_i1.RouteDef>[
     _i1.RouteDef(
+      Routes.startUpView,
+      page: _i2.StartUpView,
+    ),
+    _i1.RouteDef(
       Routes.loginView,
-      page: _i2.LoginView,
+      page: _i3.LoginView,
     ),
     _i1.RouteDef(
       Routes.signupView,
-      page: _i3.SignupView,
+      page: _i4.SignupView,
     ),
     _i1.RouteDef(
       Routes.home,
-      page: _i4.Home,
+      page: _i5.Home,
     ),
     _i1.RouteDef(
       Routes.detailView,
-      page: _i5.DetailView,
+      page: _i6.DetailView,
     ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
-    _i2.LoginView: (data) {
+    _i2.StartUpView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i2.LoginView(),
+        builder: (context) => _i2.StartUpView(),
         settings: data,
       );
     },
-    _i3.SignupView: (data) {
+    _i3.LoginView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i3.SignupView(),
+        builder: (context) => const _i3.LoginView(),
         settings: data,
       );
     },
-    _i4.Home: (data) {
+    _i4.SignupView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i4.Home(),
+        builder: (context) => const _i4.SignupView(),
         settings: data,
       );
     },
-    _i5.DetailView: (data) {
+    _i5.Home: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i5.Home(),
+        settings: data,
+      );
+    },
+    _i6.DetailView: (data) {
       final args = data.getArgs<DetailViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i5.DetailView(key: args.key, home: args.home),
+        builder: (context) => _i6.DetailView(key: args.key, home: args.home),
         settings: data,
       );
     },
@@ -92,12 +106,26 @@ class DetailViewArguments {
     required this.home,
   });
 
-  final _i6.Key? key;
+  final _i7.Key? key;
 
-  final _i7.HomeModel home;
+  final _i8.HomeModel home;
 }
 
-extension NavigatorStateExtension on _i8.NavigationService {
+extension NavigatorStateExtension on _i9.NavigationService {
+  Future<dynamic> navigateToStartUpView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.startUpView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> navigateToLoginView([
     int? routerId,
     bool preventDuplicates = true,
@@ -141,8 +169,8 @@ extension NavigatorStateExtension on _i8.NavigationService {
   }
 
   Future<dynamic> navigateToDetailView({
-    _i6.Key? key,
-    required _i7.HomeModel home,
+    _i7.Key? key,
+    required _i8.HomeModel home,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
