@@ -16,36 +16,38 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: true,
       backgroundColor: kappBackgeroundColor,
-      title: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Location",
-            style: appTitleLocationTextStyle,
-          ),
-          Row(
-            children: [
-              Text(
-                "Lagos",
-                style: appTitleMainLocationTextStyle,
-              ),
-              Icon(
-                Icons.arrow_drop_down,
-                color: kgreyColor,
-              )
-            ],
-          ),
-        ],
-      ),
-      actions: [
-        IconButton(
-            onPressed: (() {}),
-            icon: Icon(
-              Icons.notifications,
-              color: kblackColor,
-            ))
-      ],
+      title: Text(title, style: appTitletextStyle),
+      centerTitle: true,
+      // title: Column(
+      //   mainAxisAlignment: MainAxisAlignment.start,
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: [
+      //     Text(
+      //       "Location",
+      //       style: appTitleLocationTextStyle,
+      //     ),
+      //     Row(
+      //       children: [
+      //         Text(
+      //           "Lagos",
+      //           style: appTitleMainLocationTextStyle,
+      //         ),
+      //         Icon(
+      //           Icons.arrow_drop_down,
+      //           color: kgreyColor,
+      //         )
+      //       ],
+      //     ),
+      //   ],
+      // ),
+      // actions: [
+      //   IconButton(
+      //       onPressed: (() {}),
+      //       icon: Icon(
+      //         Icons.notifications,
+      //         color: kblackColor,
+      //       ))
+      // ],
       elevation: 0,
     );
   }

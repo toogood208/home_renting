@@ -4,9 +4,9 @@ import 'package:home_renting/app/app.locator.dart';
 import 'package:home_renting/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   setupLocator();
   runApp(const MyApp());
 }

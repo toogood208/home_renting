@@ -1,0 +1,58 @@
+import 'package:home_renting/app/app.locator.dart';
+import 'package:home_renting/app/app.router.dart';
+import 'package:home_renting/core/services/authentication_service.dart';
+import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+class SignUpViewModel extends BaseViewModel {
+  final _navigationService = locator<NavigationService>();
+   final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
+  final DialogService _dialogService = locator<DialogService>();
+
+   Future signUp({required String email, required String password}) async {
+    setBusy(true);
+
+    final result = await _authenticationService.signupWithEmail(
+        email: email, password: password);
+
+    setBusy(false);
+    if (result != null) {
+      if (result != null) {
+        _navigationService.navigateTo(Routes.home);
+      } else {
+        await _dialogService.showDialog(
+          title: 'Sign Up Failure',
+          description: 'General sign up failure. Please try again later',
+        );
+
+      }
+    } else {
+      await _dialogService.showDialog(
+        title: 'Sign Up Failure',
+        description: result.toString(),
+      );
+    }
+  }
+
+  bool passwordVisible = true;
+  bool confirmPasswordVissble = true;
+
+  void showPassword() {
+    passwordVisible = !passwordVisible;
+    notifyListeners();
+  }
+
+ void showConfirmPassword() {
+    confirmPasswordVissble = !confirmPasswordVissble;
+    notifyListeners();
+  }
+  void navigateToLoginView() {
+    _navigationService.clearStackAndShow(Routes.loginView);
+  }
+}
+extension BoolParsing on String {
+  bool parseBool() {
+    return toLowerCase() == 'true';
+  }
+}
