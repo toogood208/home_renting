@@ -12,27 +12,19 @@ class LoginViewModel extends BaseViewModel {
 
   bool passwordVisible = true;
 
-  Future login({required String email, required String password}) async {
+  Future loin({required String email, required String password}) async {
     setBusy(true);
 
-    var result = await _authenticationService.loginWithEmail(
+  final user = await _authenticationService.loginWithEmail(
         email: email, password: password);
 
     setBusy(false);
-
-    if (result is bool) {
-      if (result) {
-        _navigationService.navigateTo(Routes.home);
-      } else {
-        await _dialogService.showDialog(
-          title: 'Login Failure',
-          description: 'Couldn\'t login at this moment. Please try again later',
-        );
-      }
+    if (user != null) {
+      navigateToHomeView();
     } else {
       await _dialogService.showDialog(
-        title: 'Login Failure',
-        description: result,
+        title: "Login Failure",
+        description: "general sign up problem",
       );
     }
   }
@@ -44,5 +36,9 @@ class LoginViewModel extends BaseViewModel {
 
   void navigateToSignUpView() {
     _navigationService.clearStackAndShow(Routes.signupView);
+  }
+
+   void navigateToHomeView() {
+    _navigationService.clearStackAndShow(Routes.home);
   }
 }
