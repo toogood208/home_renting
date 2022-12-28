@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/signup/signup_view_model.dart';
 import 'package:home_renting/ui/widgets/auth_body_text_widget.dart';
@@ -15,6 +16,7 @@ class SignupView extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
+    TextEditingController fullnameController = TextEditingController();
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
@@ -26,6 +28,12 @@ class SignupView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 47),
+                CustomTextField(
+                  controller: fullnameController,
+                  title: "Enter Fullname",
+                  textInputType: TextInputType.name,
+                ),
+                const SizedBox(height: 24),
                 CustomTextField(
                   controller: emailController,
                   title: "Enter Email",
@@ -61,7 +69,31 @@ class SignupView extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 24),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 12),
+                    height: 40,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: neutralColor.shade200),
+                        borderRadius: BorderRadius.circular(6)),
+                    child: DropdownButton(
+                      value:model.selectRole,
+                      items: ["agent", "user"]
+                          .map(
+                            (String item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(item),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: ((value) {
+                        model.selectedRole(value!);
+                      }),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 24),
                 AuthBodyTextWidget(
                   firstText: "Already have an account",

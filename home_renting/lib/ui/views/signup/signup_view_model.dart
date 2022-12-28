@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:home_renting/app/app.locator.dart';
 import 'package:home_renting/app/app.router.dart';
 import 'package:home_renting/core/services/authentication_service.dart';
@@ -11,10 +10,17 @@ class SignUpViewModel extends BaseViewModel {
       locator<AuthenticationService>();
   final DialogService _dialogService = locator<DialogService>();
 
+  String selectRole = "user";
+
+  void selectedRole(String role) {
+    selectRole = role;
+    notifyListeners();
+  }
+
   Future signUp({required String email, required String password}) async {
     setBusy(true);
 
-  final user = await _authenticationService.signupWithEmail(
+    final user = await _authenticationService.signupWithEmail(
         email: email, password: password);
 
     setBusy(false);
