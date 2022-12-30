@@ -13,11 +13,16 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
+
+  # State management
   stacked: ^3.0.1
   stacked_services: ^0.9.8
+  
+  # Firebase services
   firebase_core: ^2.3.0
   cloud_firestore: ^4.3.0
   firebase_auth: ^4.2.3
+  firebase_storage: ^11.0.10
 
 dev_dependencies:
   flutter_test:

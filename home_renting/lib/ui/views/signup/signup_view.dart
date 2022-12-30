@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_renting/ui/shared/colors.dart';
-import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/signup/signup_view_model.dart';
 import 'package:home_renting/ui/widgets/auth_body_text_widget.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
@@ -17,6 +16,7 @@ class SignupView extends StatelessWidget {
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
     TextEditingController fullnameController = TextEditingController();
+    TextEditingController phoneNumberController = TextEditingController();
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
@@ -27,7 +27,7 @@ class SignupView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 47),
+                const SizedBox(height: 27),
                 CustomTextField(
                   controller: fullnameController,
                   title: "Enter Fullname",
@@ -38,6 +38,12 @@ class SignupView extends StatelessWidget {
                   controller: emailController,
                   title: "Enter Email",
                   textInputType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 24),
+                CustomTextField(
+                  controller: phoneNumberController,
+                  title: "Enter Phone number",
+                  textInputType: TextInputType.number,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
@@ -96,7 +102,7 @@ class SignupView extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 AuthBodyTextWidget(
-                  firstText: "Already have an account",
+                  firstText: "Already have an account?",
                   secondText: "Login",
                   onTap: model.navigateToLoginView,
                 ),
@@ -108,6 +114,8 @@ class SignupView extends StatelessWidget {
                     model.signUp(
                       email: emailController.text,
                       password: passwordController.text,
+                      fullname: fullnameController.text,
+                      phoneNumber: phoneNumberController.text,
                     );
                   },
                 )

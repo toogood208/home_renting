@@ -15,11 +15,11 @@ class LoginViewModel extends BaseViewModel {
   Future loin({required String email, required String password}) async {
     setBusy(true);
 
-  final user = await _authenticationService.loginWithEmail(
+  final result = await _authenticationService.loginWithEmail(
         email: email, password: password);
 
     setBusy(false);
-    if (user != null) {
+    if (result is bool) {
       navigateToHomeView();
     } else {
       await _dialogService.showDialog(

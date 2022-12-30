@@ -5,16 +5,17 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
 import 'package:flutter/material.dart';
-import 'package:home_renting/core/models/home_model.dart' as _i8;
+import 'package:home_renting/admin/create_rent/create_rent.dart' as _i7;
+import 'package:home_renting/core/models/home_model.dart' as _i9;
 import 'package:home_renting/ui/views/detail/detail_view.dart' as _i6;
 import 'package:home_renting/ui/views/home/home_view.dart' as _i5;
 import 'package:home_renting/ui/views/login/login_view.dart' as _i3;
 import 'package:home_renting/ui/views/signup/signup_view.dart' as _i4;
 import 'package:home_renting/ui/views/startup_view/startup_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i10;
 
 class Routes {
   static const startUpView = '/';
@@ -27,12 +28,15 @@ class Routes {
 
   static const detailView = '/detail-view';
 
+  static const createRentView = '/create-rent-view';
+
   static const all = <String>{
     startUpView,
     loginView,
     signupView,
     home,
     detailView,
+    createRentView,
   };
 }
 
@@ -58,12 +62,16 @@ class StackedRouter extends _i1.RouterBase {
       Routes.detailView,
       page: _i6.DetailView,
     ),
+    _i1.RouteDef(
+      Routes.createRentView,
+      page: _i7.CreateRentView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.StartUpView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i2.StartUpView(),
+        builder: (context) => const _i2.StartUpView(),
         settings: data,
       );
     },
@@ -92,6 +100,12 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i7.CreateRentView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i7.CreateRentView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -106,12 +120,12 @@ class DetailViewArguments {
     required this.home,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
-  final _i8.HomeModel home;
+  final _i9.HomeModel home;
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
+extension NavigatorStateExtension on _i10.NavigationService {
   Future<dynamic> navigateToStartUpView([
     int? routerId,
     bool preventDuplicates = true,
@@ -169,8 +183,8 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }
 
   Future<dynamic> navigateToDetailView({
-    _i7.Key? key,
-    required _i8.HomeModel home,
+    _i8.Key? key,
+    required _i9.HomeModel home,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -179,6 +193,20 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.detailView,
         arguments: DetailViewArguments(key: key, home: home),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCreateRentView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.createRentView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

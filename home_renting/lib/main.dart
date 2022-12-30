@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:home_renting/admin/create_rent/create_rent.dart';
 import 'package:home_renting/app/app.locator.dart';
 import 'package:home_renting/app/app.router.dart';
-import 'package:home_renting/ui/views/signup/signup_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() async{
@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,
-      home: const SignupView(),
     );
   }
 }

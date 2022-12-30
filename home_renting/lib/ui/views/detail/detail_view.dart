@@ -21,7 +21,7 @@ class DetailView extends StatelessWidget {
               expandedHeight: 200,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset(
-                  home.image,
+                  home.image!,
                   fit: BoxFit.fill,
                 ),
               ),

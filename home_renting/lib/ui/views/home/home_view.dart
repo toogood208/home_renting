@@ -20,8 +20,15 @@ class Home extends StatelessWidget {
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: kappBackgeroundColor,
-        appBar: const CustomAppBar(
+        appBar: CustomAppBar(
           title: "Lagos",
+          actions: [
+            IconButton(
+              onPressed: model.navigateToCreateproperty,
+              color: Colors.black,
+              icon: const Icon(Icons.settings),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(20),

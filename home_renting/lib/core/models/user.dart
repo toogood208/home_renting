@@ -1,28 +1,32 @@
-class User {
+class UserModel {
   final String id;
   final String fullname;
   final String email;
   final String userRole;
+  final String phoneNumber;
 
-  User({
+  UserModel({
     required this.id,
     required this.fullname,
     required this.email,
     required this.userRole,
+    required this.phoneNumber,
   });
 
-  User.fromData(Map<String, dynamic> data)
+  UserModel.fromData(Map<String, dynamic> data)
       : id = data['id'],
         fullname = data['fullname'],
         email = data['email'],
-        userRole = data['userRole'];
+        userRole = data['userRole'],
+        phoneNumber = data["phoneNumber"];
 
   Map<String, dynamic> toJoson() {
     return {
-      "id":id,
-      "fullname":fullname,
-      "email":email,
-      "userRole":userRole,
+      "id": id,
+      "fullname": fullname,
+      "email": email,
+      "userRole": userRole,
+      "phoneNumber":phoneNumber,
     };
   }
 }

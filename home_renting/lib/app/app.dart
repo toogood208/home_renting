@@ -1,4 +1,6 @@
+import 'package:home_renting/admin/create_rent/create_rent.dart';
 import 'package:home_renting/core/services/authentication_service.dart';
+import 'package:home_renting/core/services/firestore_service.dart';
 import 'package:home_renting/core/services/home_service.dart';
 import 'package:home_renting/ui/views/detail/detail_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
@@ -14,10 +16,14 @@ import 'package:stacked_services/stacked_services.dart';
   AdaptiveRoute(page: SignupView),
   AdaptiveRoute(page: Home),
   AdaptiveRoute(page: DetailView),
+  AdaptiveRoute(page: CreateRentView),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: HomeService),
   LazySingleton(classType: DialogService),
-  LazySingleton(classType: AuthenticationService)
+
+  //Firebase Services
+  LazySingleton(classType: AuthenticationService),
+  LazySingleton(classType: FireStoreService),
 ], logger: StackedLogger())
 class App {}

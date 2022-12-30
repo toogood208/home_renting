@@ -3,19 +3,21 @@ import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {Key? key,
-      required this.title,
-      this.suffixIcon,
-      required this.textInputType,
-      this.obscureText = false,
-      this.controller,})
-      : super(key: key);
+  const CustomTextField({
+    Key? key,
+    required this.title,
+    this.suffixIcon,
+    required this.textInputType,
+    this.obscureText = false,
+    this.controller,
+    this.maxlines = 1,
+  }) : super(key: key);
   final String title;
   final Widget? suffixIcon;
   final TextInputType textInputType;
   final bool obscureText;
   final TextEditingController? controller;
+  final int? maxlines;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class CustomTextField extends StatelessWidget {
               border: Border.all(color: neutralColor.shade200),
               borderRadius: BorderRadius.circular(6)),
           child: TextField(
+            maxLines: maxlines,
             controller: controller,
             keyboardType: textInputType,
             style: textFieldHintTextStyle,

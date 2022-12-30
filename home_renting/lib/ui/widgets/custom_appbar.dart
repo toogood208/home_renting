@@ -3,13 +3,12 @@ import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({
-    Key? key,
-    required this.title,
-    this.height = kToolbarHeight
-  }) : super(key: key);
+  const CustomAppBar(
+      {Key? key, required this.title, this.height = kToolbarHeight, this.actions})
+      : super(key: key);
   final String title;
   final double height;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +39,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       //     ),
       //   ],
       // ),
-      // actions: [
-      //   IconButton(
-      //       onPressed: (() {}),
-      //       icon: Icon(
-      //         Icons.notifications,
-      //         color: kblackColor,
-      //       ))
-      // ],
+      actions: actions,
       elevation: 0,
     );
   }
 
   @override
-  Size get preferredSize =>Size.fromHeight(height);
+  Size get preferredSize => Size.fromHeight(height);
 }

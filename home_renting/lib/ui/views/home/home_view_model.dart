@@ -19,7 +19,12 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void navigateToCreateproperty() {
+    _navigationService.navigateTo(Routes.createRentView);
+  }
+
   void navigateToDetailView(HomeModel home) {
-    _navigationService.navigateTo(Routes.detailView, arguments: DetailViewArguments(home: home));
+    _navigationService.navigateTo(Routes.detailView,
+        arguments: DetailViewArguments(home: home));
   }
 }

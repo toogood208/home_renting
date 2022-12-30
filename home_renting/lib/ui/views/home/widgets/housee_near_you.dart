@@ -26,7 +26,7 @@ class HousesNearYouWidget extends ViewModelWidget<HomeViewModel> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                        image: AssetImage(home.image),
+                        image: AssetImage(home.image!),
                         colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.95), BlendMode.dstATop),
                         fit: BoxFit.cover),

@@ -26,7 +26,7 @@ class RoomsListViewWidget extends ViewModelWidget<HomeViewModel> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
-                          image: AssetImage(home.image), fit: BoxFit.cover),
+                          image: AssetImage(home.image!), fit: BoxFit.cover),
                     ),
                   ),
                   const SizedBox(width: 20),
