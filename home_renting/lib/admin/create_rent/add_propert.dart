@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:home_renting/admin/create_rent/create_rent_view_nodel.dart';
-import 'package:home_renting/core/models/home_model.dart';
+import 'package:home_renting/admin/create_rent/add_property_view_model.dart';
+import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_button.dart';
 import 'package:home_renting/ui/widgets/custom_dropdowm.dart';
 import 'package:home_renting/ui/widgets/custom_text_field.dart';
 import 'package:stacked/stacked.dart';
 
-class CreateRentView extends StatelessWidget {
-  CreateRentView({super.key, required this.property});
-  final HomeModel? property;
+class AddPropertView extends StatelessWidget {
+  AddPropertView({super.key, this.property});
+  final Property? property;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -19,7 +19,7 @@ class CreateRentView extends StatelessWidget {
   final TextEditingController bathroomController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreateRentViewModel>.reactive(
+    return ViewModelBuilder<AddPropertViewModel>.reactive(
       onModelReady: (model) {
         nameController.text = property?.name ?? "";
         locationController.text = property?.location ?? "";
@@ -28,10 +28,14 @@ class CreateRentView extends StatelessWidget {
         priceController.text = property?.price ?? "";
         bedroomController.text = property?.numberOfBedrooms ?? "";
         bathroomController.text = property?.numberOfBathroom ?? "";
+        model.selectedAvailability = property?.isAvalable ?? "yes";
+        model.selectCategory = property?.type ?? "Shop";
 
-        model.setEditIngProperty(property!);
+        if (property != null) {
+          model.setEditIngProperty(property!);
+        }
       },
-      viewModelBuilder: () => CreateRentViewModel(),
+      viewModelBuilder: () => AddPropertViewModel(),
       builder: (context, model, child) {
         return Scaffold(
           appBar: const CustomAppBar(title: "Add Rents"),
@@ -42,9 +46,23 @@ class CreateRentView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 27),
-                CustomButton(
-                  title: "Upload Hero Banner",
-                  onTap: () {},
+                GestureDetector(
+                  // When we tap we call selectImage
+                  onTap: () => model.selectImage(),
+                  child: Container(
+                    height: 250,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10)),
+                    alignment: Alignment.center,
+                    child: model.selectedImage == null
+                        ? Text(
+                            'Tap to add post image',
+                            style: TextStyle(color: Colors.grey[400]),
+                          )
+                        // If we have a selected image we want to show it
+                        : Image.file(model.selectedImage!),
+                  ),
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
@@ -56,7 +74,7 @@ class CreateRentView extends StatelessWidget {
                 CustomDropdown(
                   title: "Enter Property Type",
                   categories: model.categories,
-                  value: model.selectRole,
+                  value: model.selectCategory,
                   onchanged: ((value) => model.selectedRole(value!)),
                 ),
                 const SizedBox(height: 24),

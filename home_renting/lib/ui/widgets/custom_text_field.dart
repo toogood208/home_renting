@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.maxlines = 1,
+    this.contentPadding,
   }) : super(key: key);
   final String title;
   final Widget? suffixIcon;
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final int? maxlines;
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CustomTextField extends StatelessWidget {
             style: textFieldHintTextStyle,
             obscureText: obscureText,
             decoration: InputDecoration(
+                contentPadding: contentPadding,
                 isDense: true,
                 border: InputBorder.none,
                 hintText: title,

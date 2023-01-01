@@ -1,6 +1,7 @@
-class HomeModel {
+class Property {
   String id;
-  String? image;
+  String imageUrl;
+  String imageFilename;
   String name;
   String type;
   String location;
@@ -13,9 +14,10 @@ class HomeModel {
   String description;
   String? docId;
 
-  HomeModel({
+  Property({
     required this.id,
-    this.image,
+    required this.imageUrl,
+    required this.imageFilename,
     required this.name,
     required this.type,
     required this.location,
@@ -32,7 +34,8 @@ class HomeModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'image': image ?? "",
+      'imageUrl': imageUrl,
+       'imageFilename': imageFilename,
       'name': name,
       'type': type,
       'location': location,
@@ -46,10 +49,11 @@ class HomeModel {
     };
   }
 
-  static HomeModel fromMap(Map<String, dynamic> map, String docId) {
-    return HomeModel(
+  static Property fromMap(Map<String, dynamic> map, String docId) {
+    return Property(
       id: map['id'] ?? "",
-      image: map['image'] ?? "",
+      imageUrl: map['imageUrl'] ?? "",
+      imageFilename: map['imageFilename'] ?? "",
       name: map['name'] ?? "",
       type: map['type'] ?? "",
       location: map['location'] ?? "",
@@ -58,7 +62,7 @@ class HomeModel {
       address: map['address'] ?? "",
       price: map['price'] ?? "",
       numberOfBedrooms: map['numberOfBedrooms'] ?? "",
-      numberOfBathroom: map[' numberOfBathroom'] ?? "",
+      numberOfBathroom: map['numberOfBathroom'] ?? "",
       description: map['description'] ?? "",
       docId: docId,
     );

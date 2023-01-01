@@ -1,6 +1,6 @@
 import 'package:home_renting/app/app.locator.dart';
 import 'package:home_renting/app/app.router.dart';
-import 'package:home_renting/core/models/home_model.dart';
+import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/core/services/home_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -8,7 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 class HomeViewModel extends BaseViewModel {
   final _homeService = locator<HomeService>();
   final _navigationService = locator<NavigationService>();
-  List<HomeModel> homes = [];
+  List<Property> homes = [];
 
   HomeViewModel() {
     getHomes();
@@ -23,7 +23,7 @@ class HomeViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.propertyListView);
   }
 
-  void navigateToDetailView(HomeModel home) {
+  void navigateToDetailView(Property home) {
     _navigationService.navigateTo(Routes.detailView,
         arguments: DetailViewArguments(home: home));
   }

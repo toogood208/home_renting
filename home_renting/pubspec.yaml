@@ -13,7 +13,10 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
+
+  # Images
   image_picker: ^0.8.6
+  cached_network_image: ^3.2.3
 
   # State management
   stacked: ^3.0.1

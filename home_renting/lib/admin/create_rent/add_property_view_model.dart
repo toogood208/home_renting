@@ -1,17 +1,24 @@
+import 'dart:io';
+
 import 'package:home_renting/app/app.locator.dart';
 import 'package:home_renting/app/app.logger.dart';
-import 'package:home_renting/core/models/home_model.dart';
+import 'package:home_renting/core/models/property.dart';
+import 'package:home_renting/core/services/cloud_storage_service.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
+import 'package:home_renting/core/services/image_selector_service.dart';
 import 'package:home_renting/ui/base_view_model.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class CreateRentViewModel extends BasedViewModel {
+class AddPropertViewModel extends BasedViewModel {
   final FireStoreService _firestoreService = locator<FireStoreService>();
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
-
-  HomeModel? _editProperty;
-  void setEditIngProperty(HomeModel property) {
+  final ImageSelectorservice _imageSelectorService =
+      locator<ImageSelectorservice>();
+  final CloudStorageService _cloudStorageService =
+      locator<CloudStorageService>();
+  Property? _editProperty;
+  void setEditIngProperty(Property property) {
     _editProperty = property;
   }
 
@@ -33,7 +40,7 @@ class CreateRentViewModel extends BasedViewModel {
 
   List<String> get isAvailable => _isAvailable;
 
-  String selectRole = "Shop";
+  String selectCategory = "Shop";
 
   String selectedAvailability = "yes";
 
@@ -44,8 +51,8 @@ class CreateRentViewModel extends BasedViewModel {
   }
 
   void selectedRole(String role) {
-    selectRole = role;
-    log.v(selectRole);
+    selectCategory = role;
+    log.v(selectCategory);
     notifyListeners();
   }
 
@@ -59,13 +66,20 @@ class CreateRentViewModel extends BasedViewModel {
     required String numberOfBedrooms,
     required String description,
   }) async {
-    final dynamic  response;
     setBusy(true);
+    final dynamic response;
+    CloudStorageResult? cloudStorageResult;
     if (!_editting) {
-     response = await _firestoreService.addRent(HomeModel(
+      cloudStorageResult = await _cloudStorageService.uploadImage(
+          imageToUpload: selectedImage!, title: name);
+    }
+    if (!_editting) {
+      response = await _firestoreService.addRent(Property(
         id: currentUser.id,
+        imageUrl: cloudStorageResult!.imageUrl,
+        imageFilename: cloudStorageResult.imageFileName,
         name: name,
-        type: selectRole,
+        type: selectCategory,
         location: location,
         owner: currentUser.fullname,
         isAvalable: selectedAvailability,
@@ -76,10 +90,12 @@ class CreateRentViewModel extends BasedViewModel {
         description: description,
       ));
     } else {
-     response = await _firestoreService.updateProperty(HomeModel(
+      response = await _firestoreService.updateProperty(Property(
         id: _editProperty!.id,
         name: name,
-        type: selectRole,
+        imageUrl: _editProperty!.imageUrl,
+        imageFilename: _editProperty!.imageFilename,
+        type: selectCategory,
         location: location,
         owner: currentUser.fullname,
         isAvalable: selectedAvailability,
@@ -101,10 +117,19 @@ class CreateRentViewModel extends BasedViewModel {
       log.d(response);
     } else {
       await _dialogService.showDialog(
-        title: "Property Added Succesfully",
-        description: "Your Property Has Been Created",
+        title: !_editting? "Property Added Succesfully":"Property Updated Succesfully",
+        description: !_editting?"Your Property Has Been Created":"Your Property Has Been Updated",
       );
     }
     _navigationService.popRepeated(1);
+  }
+
+  File? selectedImage;
+
+  Future selectImage() async {
+    final tempImage = await _imageSelectorService.selectImage();
+    final imageFile = File(tempImage!.path);
+    selectedImage = imageFile;
+    notifyListeners();
   }
 }

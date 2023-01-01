@@ -1,7 +1,8 @@
 import 'package:home_renting/app/app.locator.dart';
 import 'package:home_renting/app/app.logger.dart';
 import 'package:home_renting/app/app.router.dart';
-import 'package:home_renting/core/models/home_model.dart';
+import 'package:home_renting/core/models/property.dart';
+import 'package:home_renting/core/services/cloud_storage_service.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
 import 'package:home_renting/ui/base_view_model.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -10,16 +11,16 @@ class PropertyListViewModel extends BasedViewModel {
   final FireStoreService _firestoreService = locator<FireStoreService>();
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
+  final CloudStorageService _cloudStorageService = locator<CloudStorageService>();
   final log = getLogger("PropertyListViewModel");
-  List<HomeModel> _properties = [];
-  List<HomeModel> get properties => _properties;
-
+  List<Property> _properties = [];
+  List<Property> get properties => _properties;
   Future fetchProperties() async {
     setBusy(true);
     final result = await _firestoreService.getPropertiesOneOff();
     setBusy(false);
     log.v(result);
-    if (result is List<HomeModel>) {
+    if (result is List<Property>) {
       _properties = result;
       notifyListeners();
     } else {
@@ -28,10 +29,10 @@ class PropertyListViewModel extends BasedViewModel {
     }
   }
 
-  void listenToPosts() {
+  void listenToPropert() {
     setBusy(true);
     _firestoreService.listenToPropertyRealTime().listen((properties) {
-      List<HomeModel> updatedPosts = properties;
+      List<Property> updatedPosts = properties;
       _properties = updatedPosts;
       notifyListeners();
       setBusy(false);
@@ -47,18 +48,22 @@ class PropertyListViewModel extends BasedViewModel {
     );
 
     if (dialogResponse!.confirmed) {
+      final propertyTodelete = _properties[index];
       setBusy(true);
-      await _firestoreService.deleteProperty(_properties[index].docId!);
+      await _firestoreService.deleteProperty(propertyTodelete.docId!);
+      await _cloudStorageService.deleteImage(propertyTodelete.docId!);
       setBusy(false);
     }
   }
 
   void naviagetToRentView() {
-    _navigationService.navigateTo(Routes.createRentView);
+    _navigationService.navigateTo(
+      Routes.addPropertView,
+    );
   }
 
   void editPost(int index) {
-    _navigationService.navigateTo(Routes.createRentView,
-        arguments: CreateRentViewArguments(property: _properties[index]));
+    _navigationService.navigateTo(Routes.addPropertView,
+        arguments: AddPropertViewArguments(property: _properties[index]));
   }
 }

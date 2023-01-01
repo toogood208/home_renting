@@ -1,12 +1,13 @@
-import 'package:home_renting/core/models/home_model.dart';
+import 'package:home_renting/core/models/property.dart';
 
 class HomeService {
-  List<HomeModel> getHomes() {
+  List<Property> getHomes() {
     final homes = [
-      HomeModel(
+      Property(
         description: "",
         id: "1",
-        image: "assets/images/house1.jpg",
+       imageUrl: "assets/images/house3.jpg",
+          imageFilename: "",
         name: "Cubana Villa",
         type: "Duplex",
         location: "Lagos",
@@ -17,10 +18,11 @@ class HomeService {
         numberOfBathroom: "4",
         numberOfBedrooms: "3",
       ),
-      HomeModel(
+      Property(
         description: "",
         id: "2",
-        image: "assets/images/house2.jpg",
+      imageUrl: "assets/images/house3.jpg",
+          imageFilename: "",
         name: "Ayo nio House",
         type: "Self Contain",
         location: "Lagos",
@@ -31,10 +33,11 @@ class HomeService {
         numberOfBathroom: '2',
         numberOfBedrooms: "1",
       ),
-      HomeModel(
+      Property(
           description: "",
           id: "3",
-          image: "assets/images/house3.jpg",
+          imageUrl: "assets/images/house3.jpg",
+          imageFilename: "",
           name: "Dundee Street 5",
           type: "Self Contain",
           location: "Abuja",
@@ -44,10 +47,11 @@ class HomeService {
           price: "200,000",
           numberOfBathroom: "2",
           numberOfBedrooms: "1"),
-      HomeModel(
+      Property(
         description: "",
         id: "4",
-        image: "assets/images/house4.jpg",
+       imageUrl: "assets/images/house3.jpg",
+        imageFilename: "",
         name: "Atamah Compound",
         type: "A room and palour self contain",
         location: "PH",
@@ -58,9 +62,10 @@ class HomeService {
         numberOfBathroom: "3",
         numberOfBedrooms: "2",
       ),
-      HomeModel(
+      Property(
         id: "5",
-        image: "assets/images/house5.jpg",
+       imageUrl: "assets/images/house3.jpg",
+          imageFilename: "",
         name: "Alhaja lasisi house",
         type: "A room and palour self contain",
         location: "Ibadan",

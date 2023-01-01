@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_renting/core/models/home_model.dart';
+import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/home/home_view_model.dart';
@@ -7,7 +7,7 @@ import 'package:stacked/stacked.dart';
 
 class DetailView extends StatelessWidget {
   const DetailView({super.key, required this.home});
-  final HomeModel home;
+  final Property home;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class DetailView extends StatelessWidget {
               expandedHeight: 200,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset(
-                  home.image!,
+                  home.imageUrl,
                   fit: BoxFit.fill,
                 ),
               ),

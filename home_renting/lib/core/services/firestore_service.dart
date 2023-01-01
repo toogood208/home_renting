@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:home_renting/app/app.logger.dart';
-import 'package:home_renting/core/models/home_model.dart';
+import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/core/models/user.dart';
 
 class FireStoreService {
@@ -12,8 +12,8 @@ class FireStoreService {
   final CollectionReference _rentCollectionRefernce =
       FirebaseFirestore.instance.collection('rent');
 
-  final StreamController<List<HomeModel>> _propertyController =
-      StreamController<List<HomeModel>>.broadcast();
+  final StreamController<List<Property>> _propertyController =
+      StreamController<List<Property>>.broadcast();
 
   final log = getLogger("FireStoreService");
 
@@ -35,7 +35,7 @@ class FireStoreService {
     }
   }
 
-  Future addRent(HomeModel homeModel) async {
+  Future addRent(Property homeModel) async {
     try {
       await _rentCollectionRefernce.add(homeModel.toMap());
       return true;
@@ -47,8 +47,8 @@ class FireStoreService {
   Future getPropertiesOneOff() async {
     try {
       final postDocuments = await _rentCollectionRefernce.get();
-      List<HomeModel> snap = postDocuments.docs
-          .map((e) => HomeModel.fromMap(e.data() as Map<String, dynamic>, e.id))
+      List<Property> snap = postDocuments.docs
+          .map((e) => Property.fromMap(e.data() as Map<String, dynamic>, e.id))
           .toList();
       return snap;
     } catch (e) {
@@ -64,7 +64,7 @@ class FireStoreService {
       if (event.docs.isNotEmpty) {
         final property = event.docs
             .map((e) =>
-                HomeModel.fromMap(e.data() as Map<String, dynamic>, e.id))
+                Property.fromMap(e.data() as Map<String, dynamic>, e.id))
             .toList();
         _propertyController.add(property);
       }
@@ -77,7 +77,7 @@ class FireStoreService {
     await _rentCollectionRefernce.doc(documentId).delete();
   }
 
-  Future updateProperty(HomeModel property) async {
+  Future updateProperty(Property property) async {
     try {
       await _rentCollectionRefernce
           .doc(property.docId)
