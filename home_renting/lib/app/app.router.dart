@@ -5,17 +5,19 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/create_rent.dart' as _i7;
-import 'package:home_renting/core/models/home_model.dart' as _i9;
+import 'package:home_renting/admin/property_list/property_list_view.dart'
+    as _i8;
+import 'package:home_renting/core/models/home_model.dart' as _i10;
 import 'package:home_renting/ui/views/detail/detail_view.dart' as _i6;
 import 'package:home_renting/ui/views/home/home_view.dart' as _i5;
 import 'package:home_renting/ui/views/login/login_view.dart' as _i3;
 import 'package:home_renting/ui/views/signup/signup_view.dart' as _i4;
 import 'package:home_renting/ui/views/startup_view/startup_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i10;
+import 'package:stacked_services/stacked_services.dart' as _i11;
 
 class Routes {
   static const startUpView = '/';
@@ -30,6 +32,8 @@ class Routes {
 
   static const createRentView = '/create-rent-view';
 
+  static const propertyListView = '/property-list-view';
+
   static const all = <String>{
     startUpView,
     loginView,
@@ -37,6 +41,7 @@ class Routes {
     home,
     detailView,
     createRentView,
+    propertyListView,
   };
 }
 
@@ -65,6 +70,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.createRentView,
       page: _i7.CreateRentView,
+    ),
+    _i1.RouteDef(
+      Routes.propertyListView,
+      page: _i8.PropertyListView,
     ),
   ];
 
@@ -101,8 +110,16 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i7.CreateRentView: (data) {
+      final args = data.getArgs<CreateRentViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i7.CreateRentView(),
+        builder: (context) =>
+            _i7.CreateRentView(key: args.key, property: args.property),
+        settings: data,
+      );
+    },
+    _i8.PropertyListView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i8.PropertyListView(),
         settings: data,
       );
     },
@@ -120,12 +137,23 @@ class DetailViewArguments {
     required this.home,
   });
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
-  final _i9.HomeModel home;
+  final _i10.HomeModel home;
 }
 
-extension NavigatorStateExtension on _i10.NavigationService {
+class CreateRentViewArguments {
+  const CreateRentViewArguments({
+    this.key,
+    required this.property,
+  });
+
+  final _i9.Key? key;
+
+  final _i10.HomeModel property;
+}
+
+extension NavigatorStateExtension on _i11.NavigationService {
   Future<dynamic> navigateToStartUpView([
     int? routerId,
     bool preventDuplicates = true,
@@ -183,8 +211,8 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToDetailView({
-    _i8.Key? key,
-    required _i9.HomeModel home,
+    _i9.Key? key,
+    required _i10.HomeModel home,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -199,14 +227,31 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToCreateRentView([
+  Future<dynamic> navigateToCreateRentView({
+    _i9.Key? key,
+    required _i10.HomeModel property,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.createRentView,
+        arguments: CreateRentViewArguments(key: key, property: property),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToPropertyListView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.createRentView,
+    return navigateTo<dynamic>(Routes.propertyListView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

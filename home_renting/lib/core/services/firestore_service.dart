@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:home_renting/app/app.logger.dart';
@@ -9,6 +11,9 @@ class FireStoreService {
       FirebaseFirestore.instance.collection('user');
   final CollectionReference _rentCollectionRefernce =
       FirebaseFirestore.instance.collection('rent');
+
+  final StreamController<List<HomeModel>> _propertyController =
+      StreamController<List<HomeModel>>.broadcast();
 
   final log = getLogger("FireStoreService");
 
@@ -39,17 +44,45 @@ class FireStoreService {
     }
   }
 
-  Future getProperties() async {
+  Future getPropertiesOneOff() async {
     try {
       final postDocuments = await _rentCollectionRefernce.get();
-      log.v(postDocuments);
-      if (postDocuments.docs.isNotEmpty) {
-        return postDocuments.docs
-            .map((snapshot) =>
-                HomeModel.fromMap(snapshot.data() as Map<String, dynamic>))
-            //  .where((mappedItem) => mappedItem.id != null)
-            .toList();
+      List<HomeModel> snap = postDocuments.docs
+          .map((e) => HomeModel.fromMap(e.data() as Map<String, dynamic>, e.id))
+          .toList();
+      return snap;
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
       }
+      return e.toString();
+    }
+  }
+
+  Stream listenToPropertyRealTime() {
+    _rentCollectionRefernce.snapshots().listen((event) {
+      if (event.docs.isNotEmpty) {
+        final property = event.docs
+            .map((e) =>
+                HomeModel.fromMap(e.data() as Map<String, dynamic>, e.id))
+            .toList();
+        _propertyController.add(property);
+      }
+    });
+
+    return _propertyController.stream;
+  }
+
+  Future deleteProperty(String documentId) async {
+    await _rentCollectionRefernce.doc(documentId).delete();
+  }
+
+  Future updateProperty(HomeModel property) async {
+    try {
+      await _rentCollectionRefernce
+          .doc(property.docId)
+          .update(property.toMap());
+      return true;
     } catch (e) {
       if (e is PlatformException) {
         return e.message;

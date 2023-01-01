@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/create_rent_view_nodel.dart';
+import 'package:home_renting/core/models/home_model.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_button.dart';
 import 'package:home_renting/ui/widgets/custom_dropdowm.dart';
@@ -7,19 +8,31 @@ import 'package:home_renting/ui/widgets/custom_text_field.dart';
 import 'package:stacked/stacked.dart';
 
 class CreateRentView extends StatelessWidget {
-  const CreateRentView({super.key});
+  CreateRentView({super.key, required this.property});
+  final HomeModel? property;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController bedroomController = TextEditingController();
+  final TextEditingController bathroomController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreateRentViewModel>.reactive(
+      onModelReady: (model) {
+        nameController.text = property?.name ?? "";
+        locationController.text = property?.location ?? "";
+        descriptionController.text = property?.description ?? "";
+        addressController.text = property?.address ?? "";
+        priceController.text = property?.price ?? "";
+        bedroomController.text = property?.numberOfBedrooms ?? "";
+        bathroomController.text = property?.numberOfBathroom ?? "";
+
+        model.setEditIngProperty(property!);
+      },
       viewModelBuilder: () => CreateRentViewModel(),
       builder: (context, model, child) {
-        TextEditingController nameController = TextEditingController();
-        TextEditingController locationController = TextEditingController();
-        TextEditingController descriptionController = TextEditingController();
-        TextEditingController addressController = TextEditingController();
-        TextEditingController priceController = TextEditingController();
-        TextEditingController bedroomController = TextEditingController();
-        TextEditingController bathroomController = TextEditingController();
         return Scaffold(
           appBar: const CustomAppBar(title: "Add Rents"),
           body: SingleChildScrollView(

@@ -10,6 +10,13 @@ class CreateRentViewModel extends BasedViewModel {
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
+  HomeModel? _editProperty;
+  void setEditIngProperty(HomeModel property) {
+    _editProperty = property;
+  }
+
+  bool get _editting => _editProperty != null;
+
   final log = getLogger("CreateRentViewModel");
   final List<String> _categories = [
     "All",
@@ -52,20 +59,39 @@ class CreateRentViewModel extends BasedViewModel {
     required String numberOfBedrooms,
     required String description,
   }) async {
+    final dynamic  response;
     setBusy(true);
-    final response = await _firestoreService.addRent(HomeModel(
-      id: currentUser.id,
-      name: name,
-      type: selectRole,
-      location: location,
-      owner: currentUser.fullname,
-      isAvalable: selectedAvailability,
-      address: address,
-      price: price,
-      numberOfBedrooms: numberOfBedrooms,
-      numberOfBathroom: numberOfBathroom,
-      description: description,
-    ));
+    if (!_editting) {
+     response = await _firestoreService.addRent(HomeModel(
+        id: currentUser.id,
+        name: name,
+        type: selectRole,
+        location: location,
+        owner: currentUser.fullname,
+        isAvalable: selectedAvailability,
+        address: address,
+        price: price,
+        numberOfBedrooms: numberOfBedrooms,
+        numberOfBathroom: numberOfBathroom,
+        description: description,
+      ));
+    } else {
+     response = await _firestoreService.updateProperty(HomeModel(
+        id: _editProperty!.id,
+        name: name,
+        type: selectRole,
+        location: location,
+        owner: currentUser.fullname,
+        isAvalable: selectedAvailability,
+        address: address,
+        price: price,
+        numberOfBedrooms: numberOfBedrooms,
+        numberOfBathroom: numberOfBathroom,
+        description: description,
+        docId: _editProperty!.docId,
+      ));
+    }
+
     setBusy(false);
     if (response is String) {
       await _dialogService.showDialog(
