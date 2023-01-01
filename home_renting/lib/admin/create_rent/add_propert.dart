@@ -5,6 +5,7 @@ import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_button.dart';
 import 'package:home_renting/ui/widgets/custom_dropdowm.dart';
 import 'package:home_renting/ui/widgets/custom_text_field.dart';
+import 'package:home_renting/ui/widgets/select_image_box.dart';
 import 'package:stacked/stacked.dart';
 
 class AddPropertView extends StatelessWidget {
@@ -29,7 +30,7 @@ class AddPropertView extends StatelessWidget {
         bedroomController.text = property?.numberOfBedrooms ?? "";
         bathroomController.text = property?.numberOfBathroom ?? "";
         model.selectedAvailability = property?.isAvalable ?? "yes";
-        model.selectCategory = property?.type ?? "Shop";
+        model.selectCategory = property?.type ?? "Dublex";
 
         if (property != null) {
           model.setEditIngProperty(property!);
@@ -38,7 +39,7 @@ class AddPropertView extends StatelessWidget {
       viewModelBuilder: () => AddPropertViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          appBar: const CustomAppBar(title: "Add Rents"),
+          appBar: const CustomAppBar(title: "Add Property"),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
@@ -46,23 +47,9 @@ class AddPropertView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 27),
-                GestureDetector(
-                  // When we tap we call selectImage
-                  onTap: () => model.selectImage(),
-                  child: Container(
-                    height: 250,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10)),
-                    alignment: Alignment.center,
-                    child: model.selectedImage == null
-                        ? Text(
-                            'Tap to add post image',
-                            style: TextStyle(color: Colors.grey[400]),
-                          )
-                        // If we have a selected image we want to show it
-                        : Image.file(model.selectedImage!),
-                  ),
+                SelectImageBoxWidget(
+                  selectImage: () => model.selectImage(),
+                  selectedImage: model.selectedImage,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
@@ -147,3 +134,5 @@ class AddPropertView extends StatelessWidget {
     );
   }
 }
+
+

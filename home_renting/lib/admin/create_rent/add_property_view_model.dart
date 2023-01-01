@@ -17,32 +17,28 @@ class AddPropertViewModel extends BasedViewModel {
       locator<ImageSelectorservice>();
   final CloudStorageService _cloudStorageService =
       locator<CloudStorageService>();
-  Property? _editProperty;
-  void setEditIngProperty(Property property) {
-    _editProperty = property;
-  }
-
-  bool get _editting => _editProperty != null;
 
   final log = getLogger("CreateRentViewModel");
   final List<String> _categories = [
-    "All",
     "Self Contain",
-    "One Bedroom Flat",
-    "Two Bedroom Flat",
+    "Bedroom Flat",
     "Duplex",
     "WareHouse",
     "Office Space",
-    "Shop",
   ];
   final List<String> _isAvailable = ["yes", "no"];
+
+  Property? _editProperty;
+  bool get _editting => _editProperty != null;
   List<String> get categories => _categories;
-
   List<String> get isAvailable => _isAvailable;
-
-  String selectCategory = "Shop";
-
+  String selectCategory = "Duplex";
   String selectedAvailability = "yes";
+  File? selectedImage;
+
+  void setEditIngProperty(Property property) {
+    _editProperty = property;
+  }
 
   void selectedAvailabilty(String availabilty) {
     selectedAvailability = availabilty;
@@ -117,14 +113,16 @@ class AddPropertViewModel extends BasedViewModel {
       log.d(response);
     } else {
       await _dialogService.showDialog(
-        title: !_editting? "Property Added Succesfully":"Property Updated Succesfully",
-        description: !_editting?"Your Property Has Been Created":"Your Property Has Been Updated",
+        title: !_editting
+            ? "Property Added Succesfully"
+            : "Property Updated Succesfully",
+        description: !_editting
+            ? "Your Property Has Been Created"
+            : "Your Property Has Been Updated",
       );
     }
     _navigationService.popRepeated(1);
   }
-
-  File? selectedImage;
 
   Future selectImage() async {
     final tempImage = await _imageSelectorService.selectImage();
