@@ -55,7 +55,6 @@ class AddPropertViewModel extends BasedViewModel {
   Future addProperty({
     required String name,
     required location,
-    required owner,
     required String address,
     required String price,
     required String numberOfBathroom,

@@ -30,7 +30,7 @@ class AddPropertView extends StatelessWidget {
         bedroomController.text = property?.numberOfBedrooms ?? "";
         bathroomController.text = property?.numberOfBathroom ?? "";
         model.selectedAvailability = property?.isAvalable ?? "yes";
-        model.selectCategory = property?.type ?? "Dublex";
+        model.selectCategory = property?.type ?? "Duplex";
 
         if (property != null) {
           model.setEditIngProperty(property!);
@@ -116,7 +116,6 @@ class AddPropertView extends StatelessWidget {
                     model.addProperty(
                       name: nameController.text,
                       location: locationController.text,
-                      owner: "",
                       address: addressController.text,
                       price: priceController.text,
                       numberOfBathroom: bathroomController.text,
