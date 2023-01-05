@@ -17,6 +17,14 @@ class CloudStorageService {
     final url = downloadUrl.toString();
     return CloudStorageResult(imageUrl: url, imageFileName: imageFileName);
   }
+
+  Future<List<CloudStorageResult>> uploadMultipleImages(
+      {required List<File> images, required String title})async{
+    final imageList = await Future.wait(
+        images.map((image) => uploadImage(imageToUpload: image, title: title)));
+    return imageList;
+  }
+
   Future deleteImage(String imageFileName) async {
     final Reference firebaseStorageRef =
         FirebaseStorage.instance.ref().child(imageFileName);
@@ -28,7 +36,6 @@ class CloudStorageService {
       return e.toString();
     }
   }
-
 }
 
 class CloudStorageResult {

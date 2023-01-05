@@ -33,3 +33,16 @@ const primaryColor = MaterialColor(0xFF2563EB, {
   800: Color(0xFF143681),
   900: Color(0xFF102A63),
 });
+
+const errorColor = MaterialColor(0xFFBA0000, {
+  50: Color(0xFFF8E6E6),
+  100:  Color(0xFFEAB0B0),
+  300:  Color(0xFFD15454),
+  200: Color(0xFFDF8A8A),
+  400: Color(0xFFC83333),
+  500: Color(0xFFBA0000),
+  600: Color(0xFFA90000),
+  700: Color(0xFF840000),
+  800: Color(0xFF660000),
+  900: Color(0xFF4E0000),
+});

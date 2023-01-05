@@ -35,6 +35,7 @@ class AddPropertViewModel extends BasedViewModel {
   String selectCategory = "Duplex";
   String selectedAvailability = "yes";
   File? selectedImage;
+  List<File> selectedImages = [];
 
   void setEditIngProperty(Property property) {
     _editProperty = property;
@@ -127,6 +128,12 @@ class AddPropertViewModel extends BasedViewModel {
     final tempImage = await _imageSelectorService.selectImage();
     final imageFile = File(tempImage!.path);
     selectedImage = imageFile;
+    notifyListeners();
+  }
+
+  Future selectImages() async {
+    final tempImage = await _imageSelectorService.selectMultipleImages();
+    selectedImages = tempImage.map((e) => File(e!.path)).toList();
     notifyListeners();
   }
 }

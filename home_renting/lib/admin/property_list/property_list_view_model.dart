@@ -11,7 +11,8 @@ class PropertyListViewModel extends BasedViewModel {
   final FireStoreService _firestoreService = locator<FireStoreService>();
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
-  final CloudStorageService _cloudStorageService = locator<CloudStorageService>();
+  final CloudStorageService _cloudStorageService =
+      locator<CloudStorageService>();
   final log = getLogger("PropertyListViewModel");
   List<Property> _properties = [];
   List<Property> get properties => _properties;
@@ -29,7 +30,7 @@ class PropertyListViewModel extends BasedViewModel {
     }
   }
 
-  void listenToPropert() {
+  void listenToProperty() {
     setBusy(true);
     _firestoreService.listenToPropertyRealTime().listen((properties) {
       List<Property> updatedPosts = properties;
@@ -56,13 +57,18 @@ class PropertyListViewModel extends BasedViewModel {
     }
   }
 
-  void naviagetToRentView() {
-    _navigationService.navigateTo(
-      Routes.addPropertView,
-    );
+  void naviagetToAddPropertyView(){
+     _navigationService.navigateTo(Routes.addPropertView);
+   
   }
 
-  void editPost(int index) {
+  void naviagetToDetailPropertyView(int index){
+     _navigationService.navigateTo(Routes.detailView,
+      arguments: DetailViewArguments(home: _properties[index]));
+   
+  }
+
+  void editProperty(int index) {
     _navigationService.navigateTo(Routes.addPropertView,
         arguments: AddPropertViewArguments(property: _properties[index]));
   }

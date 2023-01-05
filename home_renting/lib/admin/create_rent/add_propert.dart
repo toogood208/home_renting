@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/add_property_view_model.dart';
 import 'package:home_renting/core/models/property.dart';
+import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_button.dart';
 import 'package:home_renting/ui/widgets/custom_dropdowm.dart';
@@ -84,6 +85,31 @@ class AddPropertView extends StatelessWidget {
                   textInputType: TextInputType.streetAddress,
                 ),
                 const SizedBox(height: 24),
+                IconButton(
+                  onPressed: (() {
+                    model.selectImages();
+                  }),
+                  icon: const Icon(Icons.add_a_photo),
+                ),
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: ListView.builder(
+                          itemCount: model.selectedImages.length,
+                          itemBuilder: (context, index) {
+                            final image = model.selectedImages[index];
+                            return Container(
+                              width: 72,
+                              height: 72,
+                              decoration: BoxDecoration(
+                                color: ownerBackgroundColor,
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: FileImage(image), fit: BoxFit.cover),
+                              ),
+                            );
+                          })),
+                ),
                 CustomTextField(
                   controller: descriptionController,
                   title: "Enter Property Description",
@@ -133,5 +159,3 @@ class AddPropertView extends StatelessWidget {
     );
   }
 }
-
-

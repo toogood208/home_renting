@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/ui/shared/colors.dart';
@@ -6,8 +7,8 @@ import 'package:home_renting/ui/views/home/home_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class DetailView extends StatelessWidget {
-  const DetailView({super.key, required this.home});
-  final Property home;
+  const DetailView({super.key, required this.property});
+  final Property property;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,8 @@ class DetailView extends StatelessWidget {
             SliverAppBar(
               expandedHeight: 200,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-                  home.imageUrl,
+                background: CachedNetworkImage(       
+                 imageUrl:  property.imageUrl,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -46,7 +47,7 @@ class DetailView extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           Text(
-                              "The 3 level house that has a modern design, has a large pool and a garage that fits up to four cars... Show More", style: searchHintTextStyle,)
+                             property.description, style: searchHintTextStyle,)
                         ],
                       ),
                     ),
@@ -74,7 +75,7 @@ class DetailView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  home.owner,
+                                  property.owner,
                                   style: nearYouTextStyle,
                                 ),
                                 Text(
@@ -184,7 +185,7 @@ class DetailView extends StatelessWidget {
                                     style: searchHintTextStyle,
                                   ),
                                   Text(
-                                    "NGN${home.price} / Year",
+                                    "NGN${property.price} / Year",
                                     style: nearYouTextStyle,
                                   )
                                 ],

@@ -105,7 +105,7 @@ class StackedRouter extends _i1.RouterBase {
     _i6.DetailView: (data) {
       final args = data.getArgs<DetailViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i6.DetailView(key: args.key, home: args.home),
+        builder: (context) => _i6.DetailView(key: args.key, property: args.home),
         settings: data,
       );
     },

@@ -14,16 +14,16 @@ TextStyle appTitleMainLocationTextStyle = GoogleFonts.raleway(
   fontWeight: FontWeight.w500,
 );
 
-TextStyle nearYouTextStyle = GoogleFonts.raleway(
-  fontSize: 16,
-  color: kblackColor,
-  fontWeight: FontWeight.w500,
+TextStyle nearYouTextStyle = GoogleFonts.manrope(
+  fontSize: 14,
+  color: neutralColor.shade700,
+  fontWeight: FontWeight.w800,
 );
 
-TextStyle searchHintTextStyle = GoogleFonts.raleway(
+TextStyle searchHintTextStyle = GoogleFonts.manrope(
   fontSize: 12,
-  color: kHintSearchColor,
-  fontWeight: FontWeight.w400,
+  color: neutralColor.shade500,
+  fontWeight: FontWeight.w500,
 );
 
 TextStyle categorySelectedStyle = GoogleFonts.raleway(
@@ -32,11 +32,10 @@ TextStyle categorySelectedStyle = GoogleFonts.raleway(
   fontWeight: FontWeight.w400,
 );
 
-TextStyle priceTextStyle = GoogleFonts.raleway(
+TextStyle priceTextStyle = GoogleFonts.manrope(
   fontSize: 12,
-  color: priceColor,
-  fontWeight: FontWeight.w400,
-);
+   color: primaryColor.shade500,
+   fontWeight: FontWeight.w600,);
 
 TextStyle dreamHouseTextStyle = GoogleFonts.raleway(
   fontSize: 16,
