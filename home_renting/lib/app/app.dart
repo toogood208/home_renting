@@ -5,6 +5,7 @@ import 'package:home_renting/core/services/cloud_storage_service.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
 import 'package:home_renting/core/services/home_service.dart';
 import 'package:home_renting/core/services/image_selector_service.dart';
+import 'package:home_renting/core/services/social_share_service.dart';
 import 'package:home_renting/ui/views/detail/detail_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/login/login_view.dart';
@@ -27,7 +28,8 @@ import 'package:stacked_services/stacked_services.dart';
   LazySingleton(classType: DialogService),
 
   // Utils
-  LazySingleton(classType:ImageSelectorservice),
+  LazySingleton(classType: ImageSelectorservice),
+  LazySingleton(classType: SocialShareService),
 
   //Firebase Services
   LazySingleton(classType: AuthenticationService),

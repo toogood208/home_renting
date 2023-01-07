@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/ui/widgets/convinience_widget.dart';
 
@@ -19,13 +20,13 @@ class ConvinenceRowWidget extends StatelessWidget {
       children: [
         ConvinenceWidget(
           numberOfConvinience: home.numberOfBedrooms,
-          convinienceIconData: Icons.bed_outlined,
+          convinienceIconData: FontAwesomeIcons.bed,
         ),
         const SizedBox(width: 20),
         ConvinenceWidget(
           numberOfConvinience: home.numberOfBathroom,
           convinienceIconData:
-              Icons.bathroom_outlined,
+            FontAwesomeIcons.bath,
         ),
       ],
     );

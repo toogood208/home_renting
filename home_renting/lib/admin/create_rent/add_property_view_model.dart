@@ -130,10 +130,4 @@ class AddPropertViewModel extends BasedViewModel {
     selectedImage = imageFile;
     notifyListeners();
   }
-
-  Future selectImages() async {
-    final tempImage = await _imageSelectorService.selectMultipleImages();
-    selectedImages = tempImage.map((e) => File(e!.path)).toList();
-    notifyListeners();
-  }
 }

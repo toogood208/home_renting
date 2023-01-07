@@ -64,7 +64,7 @@ class PropertyListViewModel extends BasedViewModel {
 
   void naviagetToDetailPropertyView(int index){
      _navigationService.navigateTo(Routes.detailView,
-      arguments: DetailViewArguments(home: _properties[index]));
+      arguments: DetailViewArguments(property: _properties[index]));
    
   }
 

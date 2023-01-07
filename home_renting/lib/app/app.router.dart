@@ -105,7 +105,8 @@ class StackedRouter extends _i1.RouterBase {
     _i6.DetailView: (data) {
       final args = data.getArgs<DetailViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i6.DetailView(key: args.key, property: args.home),
+        builder: (context) =>
+            _i6.DetailView(key: args.key, property: args.property),
         settings: data,
       );
     },
@@ -136,12 +137,12 @@ class StackedRouter extends _i1.RouterBase {
 class DetailViewArguments {
   const DetailViewArguments({
     this.key,
-    required this.home,
+    required this.property,
   });
 
   final _i9.Key? key;
 
-  final _i10.Property home;
+  final _i10.Property property;
 }
 
 class AddPropertViewArguments {
@@ -152,7 +153,7 @@ class AddPropertViewArguments {
 
   final _i9.Key? key;
 
-  final dynamic property;
+  final _i10.Property? property;
 }
 
 extension NavigatorStateExtension on _i11.NavigationService {
@@ -214,7 +215,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
 
   Future<dynamic> navigateToDetailView({
     _i9.Key? key,
-    required _i10.Property home,
+    required _i10.Property property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -222,7 +223,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.detailView,
-        arguments: DetailViewArguments(key: key, home: home),
+        arguments: DetailViewArguments(key: key, property: property),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -231,7 +232,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
 
   Future<dynamic> navigateToAddPropertView({
     _i9.Key? key,
-    dynamic property,
+    _i10.Property? property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

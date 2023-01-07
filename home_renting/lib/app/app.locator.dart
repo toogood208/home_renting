@@ -15,6 +15,7 @@ import '../core/services/cloud_storage_service.dart';
 import '../core/services/firestore_service.dart';
 import '../core/services/home_service.dart';
 import '../core/services/image_selector_service.dart';
+import '../core/services/social_share_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -29,6 +30,7 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => ImageSelectorservice());
+  locator.registerLazySingleton(() => SocialShareService());
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => FireStoreService());
   locator.registerLazySingleton(() => CloudStorageService());

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 
@@ -22,7 +23,8 @@ class ConvinenceWidget extends StatelessWidget {
           numberOfConvinience,
           style: searchHintTextStyle,
         ),
-        Icon(
+        const SizedBox(width: 5),
+        FaIcon(
           convinienceIconData,
           color:kblackColor,
           size: 12.18,

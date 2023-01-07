@@ -25,6 +25,6 @@ class HomeViewModel extends BaseViewModel {
 
   void navigateToDetailView(Property home) {
     _navigationService.navigateTo(Routes.detailView,
-        arguments: DetailViewArguments(home: home));
+        arguments: DetailViewArguments(property: home));
   }
 }

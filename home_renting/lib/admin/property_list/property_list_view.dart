@@ -20,12 +20,7 @@ class PropertyListView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           appBar: const CustomAppBar(title: "Your Properties"),
-          body: Column(
-            children: [
-            
-              const PropertyListViewWidget(),
-            ],
-          ),
+          body: const PropertyListViewWidget(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               model.naviagetToAddPropertyView();
