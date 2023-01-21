@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:home_renting/core/constants/constants.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/home/home_view_model.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_search_widget.dart';
-import 'package:home_renting/ui/widgets/home_categories_widget.dart';
 import 'package:home_renting/ui/widgets/near_you.dart';
 import 'package:home_renting/ui/widgets/property_card.dart';
 import 'package:stacked/stacked.dart';
@@ -13,6 +13,7 @@ import 'package:stacked/stacked.dart';
 part 'widgets/housee_near_you.dart';
 part 'widgets/rooms_list_view.dart';
 part 'widgets/see_more.dart';
+part 'widgets/home_categories_widget.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -41,7 +42,7 @@ class Home extends StatelessWidget {
             children: const [
               CustomSearchWidget(),
               SizedBox(height: 20),
-              HomeCategories(),
+              HomeCategoryWidget(),
               SizedBox(height: 27),
               NearYouWidget(title: "Top Rents"),
               SizedBox(height: 24),
