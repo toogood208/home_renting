@@ -11,19 +11,9 @@ class NearYouWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: nearYouTextStyle,
-        ),
-        Text(
-          "See More",
-          style: searchHintTextStyle,
-        ),
-      ],
+    return Text(
+      title,
+      style: nearYouTextStyle,
     );
   }
 }

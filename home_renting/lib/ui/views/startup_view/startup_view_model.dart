@@ -12,9 +12,9 @@ class StartUpViewModel extends BaseViewModel {
   Future handleStartUpLogic() async {
     final hasLoggedUserIn = await _authenticationService.isUserLoggedIn();
     if (hasLoggedUserIn) {
-      _navigationService.navigateTo(Routes.home);
+      _navigationService.clearStackAndShow(Routes.home);
     } else {
-      _navigationService.navigateTo(Routes.loginView);
+      _navigationService.clearStackAndShow(Routes.loginView);
     }
   }
 }

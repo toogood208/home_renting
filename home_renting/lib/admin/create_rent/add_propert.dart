@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/add_property_view_model.dart';
 import 'package:home_renting/core/models/property.dart';
-import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_button.dart';
 import 'package:home_renting/ui/widgets/custom_dropdowm.dart';
@@ -30,8 +29,9 @@ class AddPropertView extends StatelessWidget {
         priceController.text = property?.price ?? "";
         bedroomController.text = property?.numberOfBedrooms ?? "";
         bathroomController.text = property?.numberOfBathroom ?? "";
-        model.selectedAvailability = property?.isAvalable ?? "yes";
+        model.selectedAvailability = property?.isAvalable ?? model.selectedAvailability;
         model.selectCategory = property?.type ?? "Duplex";
+        model.checkBoxValue = property?.showInTopRents ?? model.checkBoxValue;
 
         if (property != null) {
           model.setEditIngProperty(property!);
@@ -62,6 +62,18 @@ class AddPropertView extends StatelessWidget {
                     controller: nameController,
                     title: "Enter Property Name",
                     textInputType: TextInputType.name,
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Show in Top Rents"),
+                      Checkbox(
+                        value: model.checkBoxValue,
+                        onChanged: (value) => model.toggleCheckBoxValue(value!),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   CustomDropdown(

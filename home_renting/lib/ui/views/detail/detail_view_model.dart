@@ -33,6 +33,7 @@ class DetailViewModel extends BasedViewModel {
       numberOfBathroom: property.numberOfBathroom,
       description: property.description,
       docId: property.docId,
+      showInTopRents: property.showInTopRents,
     ));
 
     setBusy(false);

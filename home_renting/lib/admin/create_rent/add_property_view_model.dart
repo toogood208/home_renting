@@ -18,6 +18,8 @@ class AddPropertViewModel extends BasedViewModel {
   final CloudStorageService _cloudStorageService =
       locator<CloudStorageService>();
 
+  bool checkBoxValue = false;
+
   final log = getLogger("CreateRentViewModel");
   final List<String> _categories = [
     "Self Contain",
@@ -36,6 +38,12 @@ class AddPropertViewModel extends BasedViewModel {
   String selectedAvailability = "yes";
   File? selectedImage;
   List<File> selectedImages = [];
+
+  void toggleCheckBoxValue(bool value) {
+    checkBoxValue = value;
+    notifyListeners();
+    log.v(checkBoxValue);
+  }
 
   void setEditIngProperty(Property property) {
     _editProperty = property;
@@ -84,6 +92,7 @@ class AddPropertViewModel extends BasedViewModel {
         numberOfBedrooms: numberOfBedrooms,
         numberOfBathroom: numberOfBathroom,
         description: description,
+        showInTopRents: checkBoxValue,
       ));
     } else {
       response = await _firestoreService.updateProperty(Property(
@@ -101,6 +110,7 @@ class AddPropertViewModel extends BasedViewModel {
         numberOfBathroom: numberOfBathroom,
         description: description,
         docId: _editProperty!.docId,
+        showInTopRents: checkBoxValue,
       ));
     }
 

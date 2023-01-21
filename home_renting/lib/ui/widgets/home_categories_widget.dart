@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_renting/core/constants/constants.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 
@@ -11,24 +12,14 @@ class HomeCategories extends StatefulWidget {
 
 class _HomeCategoriesState extends State<HomeCategories> {
   int _index = 0;
-  final List<String> _categories = [
-    "All",
-    "Self Contain",
-    "One Bedroom Flat",
-    "Two Bedroom Flat",
-    "Duplex",
-    "WareHouse",
-    "Office Space",
-    "Shop"
-  ];
 
   Widget _buildChips() {
     List<Widget> chips = [];
 
-    for (int i = 0; i < _categories.length; i++) {
+    for (int i = 0; i < categories.length; i++) {
       ChoiceChip choiceChip = ChoiceChip(
         label: Text(
-          _categories[i],
+          categories[i],
         ),
         labelStyle:_index == i ? categorySelectedStyle:searchHintTextStyle ,
         backgroundColor: kgreyColor,

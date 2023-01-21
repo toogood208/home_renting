@@ -3,7 +3,6 @@ import 'package:home_renting/admin/property_list/property_list_view.dart';
 import 'package:home_renting/core/services/authentication_service.dart';
 import 'package:home_renting/core/services/cloud_storage_service.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
-import 'package:home_renting/core/services/home_service.dart';
 import 'package:home_renting/core/services/image_selector_service.dart';
 import 'package:home_renting/core/services/social_share_service.dart';
 import 'package:home_renting/ui/views/detail/detail_view.dart';
@@ -24,7 +23,6 @@ import 'package:stacked_services/stacked_services.dart';
   AdaptiveRoute(page: PropertyListView)
 ], dependencies: [
   LazySingleton(classType: NavigationService),
-  LazySingleton(classType: HomeService),
   LazySingleton(classType: DialogService),
 
   // Utils

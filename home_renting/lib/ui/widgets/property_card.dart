@@ -19,7 +19,7 @@ class PropertyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:onTap,
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         decoration: BoxDecoration(
@@ -48,7 +48,7 @@ class PropertyCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  property.name,
+                  '${property.numberOfBedrooms} Bedroom(s) at ${property.location}',
                   style: nearYouTextStyle,
                 ),
                 const SizedBox(height: 8),

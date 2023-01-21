@@ -2,6 +2,7 @@ class Property {
   String id;
   String imageUrl;
   String imageFilename;
+  bool showInTopRents;
   String name;
   String type;
   String location;
@@ -28,6 +29,7 @@ class Property {
     required this.numberOfBedrooms,
     required this.numberOfBathroom,
     required this.description,
+    required this.showInTopRents,
     this.docId,
   });
 
@@ -35,7 +37,8 @@ class Property {
     return {
       'id': id,
       'imageUrl': imageUrl,
-       'imageFilename': imageFilename,
+      'showInTopRents': showInTopRents,
+      'imageFilename': imageFilename,
       'name': name,
       'type': type,
       'location': location,
@@ -64,6 +67,7 @@ class Property {
       numberOfBedrooms: map['numberOfBedrooms'] ?? "",
       numberOfBathroom: map['numberOfBathroom'] ?? "",
       description: map['description'] ?? "",
+      showInTopRents: map['showInTopRents'] ?? false,
       docId: docId,
     );
   }

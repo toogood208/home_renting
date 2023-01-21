@@ -11,11 +11,11 @@ class HousesNearYouWidget extends ViewModelWidget<HomeViewModel> {
       height: 272,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: viewModel.homes.length,
+        itemCount: viewModel.topRents.length,
         separatorBuilder: (context, index) =>
-            const Padding(padding: EdgeInsets.all(8)),
+          index > 5? const SizedBox():  const Padding(padding: EdgeInsets.all(8)),
         itemBuilder: (context, index) {
-          final home = viewModel.homes[index];
+          final home = viewModel.topRents[index];
           return GestureDetector(
             onTap: () => viewModel.navigateToDetailView(home),
             child: Stack(
@@ -26,7 +26,7 @@ class HousesNearYouWidget extends ViewModelWidget<HomeViewModel> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                        image: AssetImage(home.imageUrl),
+                        image: CachedNetworkImageProvider(home.imageUrl),
                         colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.95), BlendMode.dstATop),
                         fit: BoxFit.cover),
