@@ -6,6 +6,5 @@ import 'package:stacked/stacked.dart';
 class BasedViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
-
   UserModel get currentUser => _authenticationService.currentUser;
 }

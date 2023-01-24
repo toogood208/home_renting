@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/ui/views/search/search_view_model.dart';
 import 'package:home_renting/ui/widgets/app_spinner.dart';
 import 'package:home_renting/ui/widgets/property_card.dart';
@@ -74,9 +75,11 @@ class PropertySearch extends SearchDelegate {
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 40.0),
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                        onTap: () {},
-                        child: PropertyCard(property: suggestions[index]));
+                    Property property = suggestions[index];
+                    return PropertyCard(
+                      property: property,
+                      onTap: () => model.navigateToDetailView(property),
+                    );
                   },
                 ),
               );
@@ -107,9 +110,8 @@ class ServerListNotEmpty extends ViewModelWidget<SearchViewModel> {
       child: ListView.builder(
         itemCount: viewModel.properties.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-              onTap: () {},
-              child: PropertyCard(property: viewModel.properties[index]));
+          Property property = viewModel.properties[index];
+          return PropertyCard(property: property,onTap: () => viewModel.navigateToDetailView(property),);
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:home_renting/app/app.locator.dart';
+import 'package:home_renting/app/app.router.dart';
 import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
 import 'package:home_renting/ui/base_view_model.dart';
@@ -13,7 +14,8 @@ class SearchViewModel extends BasedViewModel {
   Future<void> onSearch(String query) async {
     if (_properties.isNotEmpty) {
       _properties = _properties
-          .where((element) => element.numberOfBathroom.toLowerCase().contains(query))
+          .where((element) =>
+              element.numberOfBathroom.toLowerCase().contains(query))
           .toList();
     } else {
       listenToProperty(query);
@@ -27,5 +29,12 @@ class SearchViewModel extends BasedViewModel {
       onSearch(query);
       setBusy(false);
     });
+  }
+
+  void navigateToDetailView(Property property) {
+    _navigationService.navigateTo(
+      Routes.detailView,
+    arguments: DetailViewArguments(property: property)
+    );
   }
 }

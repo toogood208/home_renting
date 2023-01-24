@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:home_renting/app/app.logger.dart';
 import 'package:home_renting/core/models/property.dart';
@@ -11,6 +12,8 @@ class FireStoreService {
       FirebaseFirestore.instance.collection('user');
   final CollectionReference _rentCollectionRefernce =
       FirebaseFirestore.instance.collection('rent');
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   final StreamController<List<Property>> _propertyController =
       StreamController<List<Property>>.broadcast();
@@ -60,7 +63,11 @@ class FireStoreService {
   }
 
   Stream listenToPropertyRealTime() {
-    _rentCollectionRefernce.snapshots().listen((event) {
+     final user = _firebaseAuth.currentUser;
+    _rentCollectionRefernce
+    .where("id", isEqualTo: user!.uid)
+
+    .snapshots().listen((event) {
       if (event.docs.isNotEmpty) {
         final property = event.docs
             .map((e) =>

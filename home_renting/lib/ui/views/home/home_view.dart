@@ -5,8 +5,8 @@ import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/home/home_view_model.dart';
 import 'package:home_renting/ui/views/search/search.dart';
+import 'package:home_renting/ui/widgets/app_spinner.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
-import 'package:home_renting/ui/widgets/custom_search_widget.dart';
 import 'package:home_renting/ui/widgets/near_you.dart';
 import 'package:home_renting/ui/widgets/property_card.dart';
 import 'package:stacked/stacked.dart';
@@ -42,9 +42,12 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        body: SingleChildScrollView(
+        body:
+         model.properties.isEmpty ? 
+         const  Center(child: Text("No Property To Display"),):
+        SingleChildScrollView(
           padding: const EdgeInsets.all(20),
-          child: Column(
+          child: model.isBusy ? const Center(child: AppSpinner()): Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [

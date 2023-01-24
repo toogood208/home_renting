@@ -10,7 +10,6 @@ import 'package:stacked_services/stacked_services.dart';
 class HomeViewModel extends BasedViewModel {
   final _navigationService = locator<NavigationService>();
   final FireStoreService _firestoreService = locator<FireStoreService>();
-
   int selectedTypeindex = 0;
   int _selectedCategoryIndex = -1;
 
@@ -22,7 +21,6 @@ class HomeViewModel extends BasedViewModel {
 
   HomeViewModel() {
     listenToProperty();
-  
   }
   String choice = categories[0];
 
@@ -37,7 +35,9 @@ class HomeViewModel extends BasedViewModel {
 
   void listenToProperty() {
     setBusy(true);
-    _firestoreService.listenToPropertyRealTime().listen((properties) {
+    _firestoreService
+        .listenToPropertyRealTime()
+        .listen((properties) {
       _properties = _selectedCategoryIndex > 0
           ? properties.where((property) {
               return property.type == choice;
