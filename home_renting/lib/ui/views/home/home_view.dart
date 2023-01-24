@@ -4,6 +4,7 @@ import 'package:home_renting/core/constants/constants.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/home/home_view_model.dart';
+import 'package:home_renting/ui/views/search/search.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_search_widget.dart';
 import 'package:home_renting/ui/widgets/near_you.dart';
@@ -25,8 +26,15 @@ class Home extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         backgroundColor: kappBackgeroundColor,
         appBar: CustomAppBar(
-          title: "Lagos",
+          title: "Lease Property",
           actions: [
+             IconButton(
+              onPressed: () => showSearch(
+                context: context, 
+                delegate: PropertySearch(),),
+              color: Colors.black,
+              icon: const Icon(Icons.search),
+            ),
             IconButton(
               onPressed: model.navigateToCreateproperty,
               color: Colors.black,
@@ -40,7 +48,7 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              CustomSearchWidget(),
+          
               SizedBox(height: 20),
               HomeCategoryWidget(),
               SizedBox(height: 27),

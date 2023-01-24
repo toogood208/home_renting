@@ -3,11 +3,11 @@ import 'package:home_renting/app/app.router.dart';
 import 'package:home_renting/core/constants/constants.dart';
 import 'package:home_renting/core/models/property.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
+import 'package:home_renting/ui/base_view_model.dart';
 
-import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends BaseViewModel {
+class HomeViewModel extends BasedViewModel {
   final _navigationService = locator<NavigationService>();
   final FireStoreService _firestoreService = locator<FireStoreService>();
 
@@ -22,6 +22,7 @@ class HomeViewModel extends BaseViewModel {
 
   HomeViewModel() {
     listenToProperty();
+  
   }
   String choice = categories[0];
 
