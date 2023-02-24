@@ -11,11 +11,13 @@ class AppSpinner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: size,
-      height: size,
-      child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation(color ?? Colors.grey),
+    return Center(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation(color ?? Colors.grey),
+        ),
       ),
     );
   }
