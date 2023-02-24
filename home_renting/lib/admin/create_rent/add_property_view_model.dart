@@ -19,6 +19,22 @@ class AddPropertViewModel extends BasedViewModel {
       locator<CloudStorageService>();
 
   bool checkBoxValue = false;
+  int currentStep = 0;
+
+  void stepCancel(){
+    currentStep == 0 ? null : currentStep -= 1;
+    notifyListeners();
+  }
+
+  void tapped(int step){
+    currentStep = step;
+    notifyListeners();
+  }
+
+  void continued(){
+    currentStep < 3 ? currentStep += 1 : null;
+    notifyListeners();
+  }
 
   final log = getLogger("CreateRentViewModel");
   final List<String> _categories = [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/login/login_view_model.dart';
+import 'package:home_renting/ui/widgets/app_spinner.dart';
 import 'package:home_renting/ui/widgets/auth_body_text_widget.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/custom_button.dart';
@@ -18,7 +19,8 @@ class LoginView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           appBar: const CustomAppBar(title: "Login"),
-          body: SingleChildScrollView(
+          body: model.isBusy ? const AppSpinner():
+          SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

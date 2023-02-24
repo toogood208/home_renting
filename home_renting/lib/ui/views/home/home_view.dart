@@ -28,42 +28,41 @@ class Home extends StatelessWidget {
         appBar: CustomAppBar(
           title: "Lease Property",
           actions: [
-             IconButton(
+            IconButton(
               onPressed: () => showSearch(
-                context: context, 
-                delegate: PropertySearch(),),
+                context: context,
+                delegate: PropertySearch(),
+              ),
               color: Colors.black,
               icon: const Icon(Icons.search),
             ),
             IconButton(
               onPressed: model.navigateToCreateproperty,
               color: Colors.black,
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.add),
             ),
           ],
         ),
-        body:
-         model.properties.isEmpty ? 
-         const  Center(child: Text("No Property To Display"),):
-        SingleChildScrollView(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
-          child: model.isBusy ? const Center(child: AppSpinner()): Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-          
-              SizedBox(height: 20),
-              HomeCategoryWidget(),
-              SizedBox(height: 27),
-              NearYouWidget(title: "Top Rents"),
-              SizedBox(height: 24),
-              HousesNearYouWidget(),
-              SizedBox(height: 32),
-              NearYouWidget(title: "See More"),
-              SizedBox(height: 24),
-              RoomsListViewWidget(),
-            ],
-          ),
+          child: model.isBusy
+              ? const Center(child: AppSpinner())
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    SizedBox(height: 20),
+                    HomeCategoryWidget(),
+                    SizedBox(height: 27),
+                    NearYouWidget(title: "Top Rents"),
+                    SizedBox(height: 24),
+                    HousesNearYouWidget(),
+                    SizedBox(height: 32),
+                    NearYouWidget(title: "See More"),
+                    SizedBox(height: 24),
+                    RoomsListViewWidget(),
+                  ],
+                ),
         ),
       ),
     );

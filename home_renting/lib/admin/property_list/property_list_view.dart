@@ -15,7 +15,7 @@ class PropertyListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<PropertyListViewModel>.reactive(
-      onModelReady: (model) => model.listenToProperty(),
+      onViewModelReady: (model) => model.listenToProperty(),
       viewModelBuilder: () => PropertyListViewModel(),
       builder: (context, model, child) {
         return Scaffold(

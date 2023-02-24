@@ -32,7 +32,7 @@ class PropertySearch extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: (() => SearchViewModel()),
-      onModelReady: (model) => model.listenToProperty(query),
+      onViewModelReady: (model) => model.listenToProperty(query),
       builder: ((context, model, child) {
         return model.isBusy
             ? const Center(child: AppSpinner())
@@ -47,7 +47,7 @@ class PropertySearch extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: (() => SearchViewModel()),
-      onModelReady: (model) => model.listenToProperty(query),
+      onViewModelReady: (model) => model.listenToProperty(query),
       builder: ((context, model, child) {
         final suggestions1 = model.properties;
         final suggestions = query.isEmpty
