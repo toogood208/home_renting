@@ -10,11 +10,15 @@ class StartUpViewModel extends BaseViewModel {
   final NavigationService _navigationService = locator<NavigationService>();
 
   Future handleStartUpLogic() async {
-    final hasLoggedUserIn = await _authenticationService.isUserLoggedIn();
+      final hasLoggedUserIn = await _authenticationService.isUserLoggedIn();
+    Future.delayed(const Duration(seconds: 3),(){   
     if (hasLoggedUserIn) {
       _navigationService.clearStackAndShow(Routes.home);
     } else {
       _navigationService.clearStackAndShow(Routes.loginView);
     }
-  }
+  });
+
+    }
+  
 }
