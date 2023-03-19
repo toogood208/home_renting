@@ -9,11 +9,13 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     this.busy = false,
     this.width = 48,
+    this.height = 51
   }) : super(key: key);
   final String title;
   final VoidCallback onTap;
   final bool busy;
   final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: InkWell(
         child: AnimatedContainer(
-          height: busy ? 48 : null,
+          height: busy ? height : null,
           width: busy ? width : null,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 300),
