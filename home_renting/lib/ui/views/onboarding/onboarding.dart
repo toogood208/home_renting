@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:home_renting/ui/views/onboarding/onboarding_view_model.dart';
 import 'package:home_renting/ui/views/onboarding/widgets/circles.dart';
 import 'package:home_renting/ui/views/onboarding/widgets/page_view.dart';
-import 'package:home_renting/ui/widgets/custom_back_button.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../widgets/custom_button.dart';
@@ -30,7 +29,7 @@ class OnBoardingView extends StatelessWidget {
                 children: [    
                   Container(
                     margin: EdgeInsets.only(top: screenSize.height * 0.07),
-                    height: screenSize.height * 0.55,
+                    height: screenSize.height * 0.7,
                     alignment: Alignment.center,
                     child: PageView(
                       onPageChanged: model.setCurrentIndex,
@@ -58,23 +57,25 @@ class OnBoardingView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: screenSize.height * 0.2),
+                 SizedBox(height: screenSize.height * 0.05),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             model.currentIndex == 0
                                 ? const ActiveCircle()
                                 : const InActiveCircle(),
+                                SizedBox(width: screenSize.height * 0.1),
                             model.currentIndex == 1
                                 ? const ActiveCircle()
                                 : const InActiveCircle(),
+                                SizedBox(width: screenSize.height * 0.1),
                             model.currentIndex < 2
                                 ? const InActiveCircle()
                                 : const ActiveCircle(),
                             
                           ],
                         ),
-                         SizedBox(height: screenSize.height * 0.01),
+                         SizedBox(height: screenSize.height * 0.02),
                    
                       CustomButton(
                           title: "Get Started",

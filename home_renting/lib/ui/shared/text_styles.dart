@@ -20,6 +20,12 @@ TextStyle nearYouTextStyle = GoogleFonts.manrope(
   fontWeight: FontWeight.w800,
 );
 
+TextStyle onboardingTitleTextStyle = GoogleFonts.manrope(
+  fontSize: 20,
+  color: neutralColor.shade700,
+  fontWeight: FontWeight.w800,
+);
+
 TextStyle searchHintTextStyle = GoogleFonts.manrope(
   fontSize: 12,
   color: neutralColor.shade500,

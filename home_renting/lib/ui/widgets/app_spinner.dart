@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_renting/ui/shared/colors.dart';
 
 class AppSpinner extends StatelessWidget {
   final Color? color;
@@ -16,7 +17,7 @@ class AppSpinner extends StatelessWidget {
         width: size,
         height: size,
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation(color ?? Colors.orange),
+          valueColor: AlwaysStoppedAnimation(color ?? primaryColor),
         ),
       ),
     );

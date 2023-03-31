@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:lottie/lottie.dart';
 
 
@@ -39,7 +40,7 @@ class PageViewImage extends StatelessWidget {
           children: [
             Text(
               title,
-             // style:kHeader4TextStyle,
+              style:onboardingTitleTextStyle,
             ),
             SizedBox(
               height: screenSize.height * 0.02,

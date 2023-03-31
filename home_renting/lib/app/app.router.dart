@@ -5,19 +5,20 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/add_propert.dart' as _i7;
 import 'package:home_renting/admin/property_list/property_list_view.dart'
     as _i8;
-import 'package:home_renting/core/models/property.dart' as _i10;
+import 'package:home_renting/core/models/property.dart' as _i11;
 import 'package:home_renting/ui/views/detail/detail_view.dart' as _i6;
 import 'package:home_renting/ui/views/home/home_view.dart' as _i5;
 import 'package:home_renting/ui/views/login/login_view.dart' as _i3;
+import 'package:home_renting/ui/views/onboarding/onboarding.dart' as _i9;
 import 'package:home_renting/ui/views/signup/signup_view.dart' as _i4;
 import 'package:home_renting/ui/views/startup_view/startup_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i11;
+import 'package:stacked_services/stacked_services.dart' as _i12;
 
 class Routes {
   static const startUpView = '/';
@@ -34,6 +35,8 @@ class Routes {
 
   static const propertyListView = '/property-list-view';
 
+  static const onBoardingView = '/on-boarding-view';
+
   static const all = <String>{
     startUpView,
     loginView,
@@ -42,6 +45,7 @@ class Routes {
     detailView,
     addPropertView,
     propertyListView,
+    onBoardingView,
   };
 }
 
@@ -74,6 +78,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.propertyListView,
       page: _i8.PropertyListView,
+    ),
+    _i1.RouteDef(
+      Routes.onBoardingView,
+      page: _i9.OnBoardingView,
     ),
   ];
 
@@ -126,6 +134,12 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i9.OnBoardingView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i9.OnBoardingView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -140,9 +154,9 @@ class DetailViewArguments {
     required this.property,
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
-  final _i10.Property property;
+  final _i11.Property property;
 }
 
 class AddPropertViewArguments {
@@ -151,12 +165,12 @@ class AddPropertViewArguments {
     this.property,
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
-  final _i10.Property? property;
+  final _i11.Property? property;
 }
 
-extension NavigatorStateExtension on _i11.NavigationService {
+extension NavigatorStateExtension on _i12.NavigationService {
   Future<dynamic> navigateToStartUpView([
     int? routerId,
     bool preventDuplicates = true,
@@ -214,8 +228,8 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> navigateToDetailView({
-    _i9.Key? key,
-    required _i10.Property property,
+    _i10.Key? key,
+    required _i11.Property property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -231,8 +245,8 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> navigateToAddPropertView({
-    _i9.Key? key,
-    _i10.Property? property,
+    _i10.Key? key,
+    _i11.Property? property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -255,6 +269,138 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.propertyListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToOnBoardingView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.onBoardingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithStartUpView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.startUpView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithLoginView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.loginView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSignupView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.signupView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithHome([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.home,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithDetailView({
+    _i10.Key? key,
+    required _i11.Property property,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.detailView,
+        arguments: DetailViewArguments(key: key, property: property),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithAddPropertView({
+    _i10.Key? key,
+    _i11.Property? property,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.addPropertView,
+        arguments: AddPropertViewArguments(key: key, property: property),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithPropertyListView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.propertyListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithOnBoardingView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.onBoardingView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

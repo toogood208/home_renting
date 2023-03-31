@@ -4,10 +4,12 @@ import 'package:home_renting/core/services/authentication_service.dart';
 import 'package:home_renting/core/services/cloud_storage_service.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
 import 'package:home_renting/core/services/image_selector_service.dart';
+import 'package:home_renting/core/services/shared_preferences.dart';
 import 'package:home_renting/core/services/social_share_service.dart';
 import 'package:home_renting/ui/views/detail/detail_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/login/login_view.dart';
+import 'package:home_renting/ui/views/onboarding/onboarding.dart';
 import 'package:home_renting/ui/views/signup/signup_view.dart';
 import 'package:home_renting/ui/views/startup_view/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -20,7 +22,8 @@ import 'package:stacked_services/stacked_services.dart';
   AdaptiveRoute(page: Home),
   AdaptiveRoute(page: DetailView),
   AdaptiveRoute(page: AddPropertView),
-  AdaptiveRoute(page: PropertyListView)
+  AdaptiveRoute(page: PropertyListView),
+  AdaptiveRoute(page: OnBoardingView)
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),
@@ -29,6 +32,12 @@ import 'package:stacked_services/stacked_services.dart';
   LazySingleton(classType: ImageSelectorservice),
   LazySingleton(classType: SocialShareService),
 
+   // local storage
+    Presolve(
+      classType: SharedPreferencesService,
+      presolveUsing: SharedPreferencesService.getInstance,
+    ),
+    
   //Firebase Services
   LazySingleton(classType: AuthenticationService),
   LazySingleton(classType: FireStoreService),

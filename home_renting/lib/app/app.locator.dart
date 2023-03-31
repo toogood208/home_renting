@@ -14,6 +14,7 @@ import '../core/services/authentication_service.dart';
 import '../core/services/cloud_storage_service.dart';
 import '../core/services/firestore_service.dart';
 import '../core/services/image_selector_service.dart';
+import '../core/services/shared_preferences.dart';
 import '../core/services/social_share_service.dart';
 
 final locator = StackedLocator.instance;
@@ -29,6 +30,9 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => ImageSelectorservice());
   locator.registerLazySingleton(() => SocialShareService());
+  final sharedPreferencesService = await SharedPreferencesService.getInstance();
+  locator.registerSingleton(sharedPreferencesService);
+
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => FireStoreService());
   locator.registerLazySingleton(() => CloudStorageService());
