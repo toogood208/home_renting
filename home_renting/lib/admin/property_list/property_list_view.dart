@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:home_renting/admin/property_list/property_list_view_model.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
+import 'package:home_renting/ui/widgets/empty_state.dart';
 import 'package:home_renting/ui/widgets/property_card.dart';
 import 'package:stacked/stacked.dart';
 
@@ -18,7 +19,12 @@ class PropertyListView extends StatelessWidget {
       onViewModelReady: (model) => model.listenToProperty(),
       viewModelBuilder: () => PropertyListViewModel(),
       builder: (context, model, child) {
-        return Scaffold(
+        return model.properties.isEmpty?
+        EmptyStateWidget(appBarTitle: "Your Properties",
+        mainBodyText: "No Properties Added",
+        subBodyText: "You have not added any property",
+        onTap: model.naviagetToAddPropertyView,) :
+        Scaffold(
           appBar: const CustomAppBar(title: "Your Properties"),
           body: const PropertyListViewWidget(),
           floatingActionButton: FloatingActionButton(

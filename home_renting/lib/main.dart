@@ -9,7 +9,7 @@ import 'app/app.router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  setupLocator();
+  await setupLocator();
   runApp(const MyApp());
 }
 

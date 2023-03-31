@@ -55,6 +55,12 @@ TextStyle bodySmallTextTile = GoogleFonts.manrope(
   color: neutralColor.shade600,
 );
 
+TextStyle bodySmallTextWhiteTile = GoogleFonts.manrope(
+  fontWeight: FontWeight.w500,
+  fontSize: 12,
+   color: Colors.white,
+);
+
 TextStyle textFieldHintTextStyle = GoogleFonts.manrope(
   fontWeight: FontWeight.normal,
   fontSize: 11,

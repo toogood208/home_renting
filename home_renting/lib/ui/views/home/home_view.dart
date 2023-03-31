@@ -7,6 +7,7 @@ import 'package:home_renting/ui/views/home/home_view_model.dart';
 import 'package:home_renting/ui/views/search/search.dart';
 import 'package:home_renting/ui/widgets/app_spinner.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
+import 'package:home_renting/ui/widgets/empty_state.dart';
 import 'package:home_renting/ui/widgets/near_you.dart';
 import 'package:home_renting/ui/widgets/property_card.dart';
 import 'package:stacked/stacked.dart';
@@ -23,48 +24,56 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
-      builder: (context, model, child) => Scaffold(
-        backgroundColor: kappBackgeroundColor,
-        appBar: CustomAppBar(
-          title: "Lease Property",
-          actions: [
-            IconButton(
-              onPressed: () => showSearch(
-                context: context,
-                delegate: PropertySearch(),
+      builder: (context, model, child) => model.properties.isEmpty
+          ? EmptyStateWidget(
+            appBarTitle: "Lease Property",
+            mainBodyText: "Empty Portfolio",
+            subBodyText:  "You currently dont have any property in your portfolio",
+            onTap: model.navigateToCreateproperty,
+          )
+          : Scaffold(
+              backgroundColor: kappBackgeroundColor,
+              appBar: CustomAppBar(
+                title: "Lease Property",
+                actions: [
+                  IconButton(
+                    onPressed: () => showSearch(
+                      context: context,
+                      delegate: PropertySearch(),
+                    ),
+                    color: Colors.black,
+                    icon: const Icon(Icons.search),
+                  ),
+                  IconButton(
+                    onPressed: model.navigateToCreateproperty,
+                    color: Colors.black,
+                    icon: const Icon(Icons.add),
+                  ),
+                ],
               ),
-              color: Colors.black,
-              icon: const Icon(Icons.search),
+              body: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: model.isBusy
+                    ? const Center(child: AppSpinner())
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          SizedBox(height: 20),
+                          HomeCategoryWidget(),
+                          SizedBox(height: 27),
+                          NearYouWidget(title: "Top Rents"),
+                          SizedBox(height: 24),
+                          HousesNearYouWidget(),
+                          SizedBox(height: 32),
+                          NearYouWidget(title: "See More"),
+                          SizedBox(height: 24),
+                          RoomsListViewWidget(),
+                        ],
+                      ),
+              ),
             ),
-            IconButton(
-              onPressed: model.navigateToCreateproperty,
-              color: Colors.black,
-              icon: const Icon(Icons.add),
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: model.isBusy
-              ? const Center(child: AppSpinner())
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    SizedBox(height: 20),
-                    HomeCategoryWidget(),
-                    SizedBox(height: 27),
-                    NearYouWidget(title: "Top Rents"),
-                    SizedBox(height: 24),
-                    HousesNearYouWidget(),
-                    SizedBox(height: 32),
-                    NearYouWidget(title: "See More"),
-                    SizedBox(height: 24),
-                    RoomsListViewWidget(),
-                  ],
-                ),
-        ),
-      ),
     );
   }
 }
+
