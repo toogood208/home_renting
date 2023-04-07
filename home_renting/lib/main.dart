@@ -2,9 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_renting/app/app.locator.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:home_renting/ui/views/main_view/main_view.dart';
 
-import 'app/app.router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,9 +31,9 @@ class MyApp extends StatelessWidget {
               const AppBarTheme(iconTheme: IconThemeData(color: Colors.black)),
           primarySwatch: Colors.blue,
         ),
-        navigatorKey: StackedService.navigatorKey,
-        onGenerateRoute: StackedRouter().onGenerateRoute,
-        //home: const OnBoardingView(),
+       // navigatorKey: StackedService.navigatorKey,
+        //onGenerateRoute: StackedRouter().onGenerateRoute,
+        home: const MainView(),
       );
     });
   }

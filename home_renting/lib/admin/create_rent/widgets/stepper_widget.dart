@@ -1,7 +1,6 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/add_property_view_model.dart';
-import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/widgets/custom_dropdowm.dart';
 import 'package:home_renting/ui/widgets/custom_text_field.dart';

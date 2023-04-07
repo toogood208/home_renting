@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 
-import '../shared/colors.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   const EmptyStateWidget({
@@ -44,30 +43,7 @@ class EmptyStateWidget extends StatelessWidget {
                 style: bodySmallTextTile,
               ),
               SizedBox(height: 24.h),
-              InkWell(
-                onTap: onTap,
-                child: Ink(
-                  
-                  padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                  width: 133.w,
-                  height: 40.w,
-                  decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Add Property',
-                        style: bodySmallTextWhiteTile,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+             
             ],
           ),
         ));
