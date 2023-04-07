@@ -33,6 +33,12 @@ TextStyle searchHintTextStyle = GoogleFonts.manrope(
   fontWeight: FontWeight.w500,
 );
 
+TextStyle addPropertHintTextStyle = GoogleFonts.manrope(
+  fontSize: 12,
+  color: Colors.blue[400],
+  fontWeight: FontWeight.w500,
+);
+
 TextStyle categorySelectedStyle = GoogleFonts.raleway(
   fontSize: 12,
   color: Colors.white,
@@ -71,6 +77,12 @@ TextStyle appTitletextStyle = GoogleFonts.inter(
   fontSize: 16,
   fontWeight: FontWeight.w600,
   color: neutralColor.shade900,
+);
+
+TextStyle appPropertyTitletextStyle = GoogleFonts.inter(
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+  color: Colors.blue,
 );
 
 TextStyle authBodyTextTextStyle = GoogleFonts.inter(

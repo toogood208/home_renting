@@ -39,7 +39,6 @@ class CustomTextField extends StatelessWidget {
             maxLines: maxlines,
             controller: controller,
             keyboardType: textInputType,
-            style: textFieldHintTextStyle,
             obscureText: obscureText,
             decoration: InputDecoration(
                 contentPadding: contentPadding,
