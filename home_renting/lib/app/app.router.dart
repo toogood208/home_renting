@@ -5,20 +5,22 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i10;
+import 'package:flutter/material.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/add_propert.dart' as _i7;
 import 'package:home_renting/admin/property_list/property_list_view.dart'
     as _i8;
-import 'package:home_renting/core/models/property.dart' as _i11;
+import 'package:home_renting/core/models/property.dart' as _i13;
 import 'package:home_renting/ui/views/detail/detail_view.dart' as _i6;
 import 'package:home_renting/ui/views/home/home_view.dart' as _i5;
 import 'package:home_renting/ui/views/login/login_view.dart' as _i3;
+import 'package:home_renting/ui/views/main_view/main_view.dart' as _i11;
 import 'package:home_renting/ui/views/onboarding/onboarding.dart' as _i9;
+import 'package:home_renting/ui/views/profile/profile.dart' as _i10;
 import 'package:home_renting/ui/views/signup/signup_view.dart' as _i4;
 import 'package:home_renting/ui/views/startup_view/startup_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i12;
+import 'package:stacked_services/stacked_services.dart' as _i14;
 
 class Routes {
   static const startUpView = '/';
@@ -37,6 +39,10 @@ class Routes {
 
   static const onBoardingView = '/on-boarding-view';
 
+  static const profileView = '/profile-view';
+
+  static const mainView = '/main-view';
+
   static const all = <String>{
     startUpView,
     loginView,
@@ -46,6 +52,8 @@ class Routes {
     addPropertView,
     propertyListView,
     onBoardingView,
+    profileView,
+    mainView,
   };
 }
 
@@ -82,6 +90,14 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.onBoardingView,
       page: _i9.OnBoardingView,
+    ),
+    _i1.RouteDef(
+      Routes.profileView,
+      page: _i10.ProfileView,
+    ),
+    _i1.RouteDef(
+      Routes.mainView,
+      page: _i11.MainView,
     ),
   ];
 
@@ -140,6 +156,21 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i10.ProfileView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i10.ProfileView(),
+        settings: data,
+      );
+    },
+    _i11.MainView: (data) {
+      final args = data.getArgs<MainViewArguments>(
+        orElse: () => const MainViewArguments(),
+      );
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i11.MainView(key: args.key, title: args.title),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -154,9 +185,9 @@ class DetailViewArguments {
     required this.property,
   });
 
-  final _i10.Key? key;
+  final _i12.Key? key;
 
-  final _i11.Property property;
+  final _i13.Property property;
 }
 
 class AddPropertViewArguments {
@@ -165,12 +196,23 @@ class AddPropertViewArguments {
     this.property,
   });
 
-  final _i10.Key? key;
+  final _i12.Key? key;
 
-  final _i11.Property? property;
+  final _i13.Property? property;
 }
 
-extension NavigatorStateExtension on _i12.NavigationService {
+class MainViewArguments {
+  const MainViewArguments({
+    this.key,
+    this.title,
+  });
+
+  final _i12.Key? key;
+
+  final String? title;
+}
+
+extension NavigatorStateExtension on _i14.NavigationService {
   Future<dynamic> navigateToStartUpView([
     int? routerId,
     bool preventDuplicates = true,
@@ -228,8 +270,8 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToDetailView({
-    _i10.Key? key,
-    required _i11.Property property,
+    _i12.Key? key,
+    required _i13.Property property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -245,8 +287,8 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToAddPropertView({
-    _i10.Key? key,
-    _i11.Property? property,
+    _i12.Key? key,
+    _i13.Property? property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -283,6 +325,37 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.onBoardingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToProfileView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.profileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToMainView({
+    _i12.Key? key,
+    String? title,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.mainView,
+        arguments: MainViewArguments(key: key, title: title),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -346,8 +419,8 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithDetailView({
-    _i10.Key? key,
-    required _i11.Property property,
+    _i12.Key? key,
+    required _i13.Property property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -363,8 +436,8 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithAddPropertView({
-    _i10.Key? key,
-    _i11.Property? property,
+    _i12.Key? key,
+    _i13.Property? property,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -401,6 +474,37 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.onBoardingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithProfileView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.profileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithMainView({
+    _i12.Key? key,
+    String? title,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.mainView,
+        arguments: MainViewArguments(key: key, title: title),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

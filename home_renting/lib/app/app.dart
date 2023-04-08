@@ -9,7 +9,9 @@ import 'package:home_renting/core/services/social_share_service.dart';
 import 'package:home_renting/ui/views/detail/detail_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/login/login_view.dart';
+import 'package:home_renting/ui/views/main_view/main_view.dart';
 import 'package:home_renting/ui/views/onboarding/onboarding.dart';
+import 'package:home_renting/ui/views/profile/profile.dart';
 import 'package:home_renting/ui/views/signup/signup_view.dart';
 import 'package:home_renting/ui/views/startup_view/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -23,7 +25,9 @@ import 'package:stacked_services/stacked_services.dart';
   AdaptiveRoute(page: DetailView),
   AdaptiveRoute(page: AddPropertView),
   AdaptiveRoute(page: PropertyListView),
-  AdaptiveRoute(page: OnBoardingView)
+  AdaptiveRoute(page: OnBoardingView),
+  AdaptiveRoute(page: ProfileView),
+  AdaptiveRoute(page: MainView)
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),

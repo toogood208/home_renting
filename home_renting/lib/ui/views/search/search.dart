@@ -91,12 +91,17 @@ class PropertySearch extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      scaffoldBackgroundColor: Colors.white,
         primaryColor: Colors.white,
         primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.black),
         primaryTextTheme: theme.textTheme,
         inputDecorationTheme: const InputDecorationTheme(
           border: InputBorder.none,
-        ));
+        ),);
   }
 }
 

@@ -17,7 +17,7 @@ class StartUpViewModel extends BaseViewModel {
     final onboardingDone = await _localStorage.getData("onboard");
     await Future.delayed(const Duration(seconds: 3), () {
       if (hasLoggedUserIn) {
-        _navigationService.clearStackAndShow(Routes.home);
+        _navigationService.clearStackAndShow(Routes.mainView);
       } else if (onboardingDone == null) {
         _navigationService.clearStackAndShow(Routes.onBoardingView);
       } else {

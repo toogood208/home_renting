@@ -20,7 +20,7 @@ class HomeViewModel extends BasedViewModel {
   List<Property> get topRents => _topRents;
 
   HomeViewModel() {
-   // listenToProperty();
+   listenToProperty();
   }
   String choice = categories[0];
 

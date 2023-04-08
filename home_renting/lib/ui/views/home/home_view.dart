@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_renting/core/constants/constants.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
@@ -24,13 +25,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
-      builder: (context, model, child) => model.properties.isEmpty
-          ? EmptyStateWidget(
-            appBarTitle: "Lease Property",
-            mainBodyText: "Empty Portfolio",
-            subBodyText:  "You currently dont have any property in your portfolio",
-            onTap: model.navigateToCreateproperty,
-          )
+      builder: (context, model, child) => model.isBusy
+          ? const Scaffold(
+              body: Center(
+                child: AppSpinner(),
+              ),
+            )
           : Scaffold(
               backgroundColor: kappBackgeroundColor,
               appBar: CustomAppBar(
@@ -44,11 +44,6 @@ class Home extends StatelessWidget {
                     color: Colors.black,
                     icon: const Icon(Icons.search),
                   ),
-                  IconButton(
-                    onPressed: model.navigateToCreateproperty,
-                    color: Colors.black,
-                    icon: const Icon(Icons.add),
-                  ),
                 ],
               ),
               body: SingleChildScrollView(
@@ -58,17 +53,22 @@ class Home extends StatelessWidget {
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          SizedBox(height: 20),
-                          HomeCategoryWidget(),
-                          SizedBox(height: 27),
-                          NearYouWidget(title: "Top Rents"),
-                          SizedBox(height: 24),
-                          HousesNearYouWidget(),
-                          SizedBox(height: 32),
-                          NearYouWidget(title: "See More"),
-                          SizedBox(height: 24),
-                          RoomsListViewWidget(),
+                        children: [
+                          const SizedBox(height: 20),
+                          const HomeCategoryWidget(),
+                          const SizedBox(height: 24),
+                          model.properties.isEmpty
+                              ? SizedBox(
+                                height: 500.h,
+                                child: EmptyStateWidget(
+                                    appBarTitle: "Lease Property",
+                                    mainBodyText: "Empty Portfolio",
+                                    subBodyText:
+                                        "You currently dont have any property in your portfolio",
+                                    onTap: model.navigateToCreateproperty,
+                                  ),
+                              )
+                              : const RoomsListViewWidget(),
                         ],
                       ),
               ),
@@ -76,4 +76,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-

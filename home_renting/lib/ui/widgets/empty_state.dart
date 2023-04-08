@@ -21,31 +21,33 @@ class EmptyStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(title: appBarTitle),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/empty2.png",
-                width: 311.w,
-                height: 364.h,
-              ),
-              SizedBox(height: 24.h),
-              Text(
-                mainBodyText,
-                style: onboardingTitleTextStyle,
-              ),
-              SizedBox(height: 8.h),
-              Text(
-               subBodyText,
-                style: bodySmallTextTile,
-              ),
-              SizedBox(height: 24.h),
-             
-            ],
-          ),
+        body: ListView(
+          shrinkWrap: true,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/empty2.png",
+                  width: 311.w,
+                  height: 364.h,
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  mainBodyText,
+                  style: onboardingTitleTextStyle,
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                 subBodyText,
+                  style: bodySmallTextTile,
+                ),
+                SizedBox(height: 24.h),
+               
+              ],
+            ),
+          ],
         ));
   }
 }
