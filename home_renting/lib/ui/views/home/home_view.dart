@@ -9,7 +9,6 @@ import 'package:home_renting/ui/views/search/search.dart';
 import 'package:home_renting/ui/widgets/app_spinner.dart';
 import 'package:home_renting/ui/widgets/custom_appbar.dart';
 import 'package:home_renting/ui/widgets/empty_state.dart';
-import 'package:home_renting/ui/widgets/near_you.dart';
 import 'package:home_renting/ui/widgets/property_card.dart';
 import 'package:stacked/stacked.dart';
 

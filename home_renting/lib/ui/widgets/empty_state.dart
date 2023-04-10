@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
-import 'package:home_renting/ui/widgets/custom_appbar.dart';
 
 
 class EmptyStateWidget extends StatelessWidget {

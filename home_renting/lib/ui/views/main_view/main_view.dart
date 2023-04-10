@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:home_renting/admin/property_list/property_list_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/main_view/widgets/custom_fab.dart';
 import 'package:home_renting/ui/views/profile/profile.dart';

@@ -48,7 +48,7 @@ class PropertyCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${property.numberOfBedrooms} Bedroom(s) at ${property.location}',
+                  '${property.numberOfBedrooms} Bedroom at ${property.location}',
                   style: nearYouTextStyle,
                 ),
                 const SizedBox(height: 8),

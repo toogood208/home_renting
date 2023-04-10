@@ -6,6 +6,7 @@ import 'package:home_renting/core/services/firestore_service.dart';
 import 'package:home_renting/core/services/image_selector_service.dart';
 import 'package:home_renting/core/services/shared_preferences.dart';
 import 'package:home_renting/core/services/social_share_service.dart';
+import 'package:home_renting/ui/views/about/about.dart';
 import 'package:home_renting/ui/views/detail/detail_view.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/login/login_view.dart';
@@ -27,7 +28,8 @@ import 'package:stacked_services/stacked_services.dart';
   AdaptiveRoute(page: PropertyListView),
   AdaptiveRoute(page: OnBoardingView),
   AdaptiveRoute(page: ProfileView),
-  AdaptiveRoute(page: MainView)
+  AdaptiveRoute(page: MainView),
+  AdaptiveRoute(page: AboutView),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),

@@ -95,8 +95,7 @@ class PropertySearch extends SearchDelegate {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.white,
+        primaryColor: Colors.black,
         primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.black),
         primaryTextTheme: theme.textTheme,
         inputDecorationTheme: const InputDecorationTheme(
