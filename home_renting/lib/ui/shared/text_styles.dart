@@ -91,6 +91,13 @@ TextStyle authBodyTextTextStyle = GoogleFonts.inter(
   color: neutralColor.shade900,
 );
 
+TextStyle errorBodyTextTextStyle = GoogleFonts.inter(
+  fontSize: 12,
+  fontWeight: FontWeight.normal,
+  color: Colors.red,
+);
+
+
 TextStyle buttonTextStle = GoogleFonts.manrope(
   fontSize: 16,
   fontWeight: FontWeight.bold,

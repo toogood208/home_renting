@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.maxlines = 1,
     this.contentPadding,
+    this.validator,
   }) : super(key: key);
   final String title;
   final Widget? suffixIcon;
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final int? maxlines;
   final EdgeInsetsGeometry? contentPadding;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +37,16 @@ class CustomTextField extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: neutralColor.shade200),
               borderRadius: BorderRadius.circular(6)),
-          child: TextField(
+          child: TextFormField(
             maxLines: maxlines,
             controller: controller,
             keyboardType: textInputType,
             obscureText: obscureText,
+            validator: validator,
             decoration: InputDecoration(
                 contentPadding: contentPadding,
                 isDense: true,
+                errorStyle:errorBodyTextTextStyle ,
                 border: InputBorder.none,
                 hintText: title,
                 hintStyle: textFieldHintTextStyle,

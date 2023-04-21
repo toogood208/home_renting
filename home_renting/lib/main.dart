@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
         theme: ThemeData(
           appBarTheme:
               const AppBarTheme(iconTheme: IconThemeData(color: Colors.black)),

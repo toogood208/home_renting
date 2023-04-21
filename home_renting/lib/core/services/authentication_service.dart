@@ -12,12 +12,15 @@ class AuthenticationService {
   UserModel? _currentUser;
   UserModel get currentUser => _currentUser!;
 
+  Future signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
   Future _populateCurrentUser(User? user) async {
     if (user != null) {
       _currentUser = await _fireStoreService.getUser(user.uid);
-       log.v(_currentUser!.id);
+      log.v(_currentUser!.id);
     }
-   
   }
 
   Future<bool> isUserLoggedIn() async {

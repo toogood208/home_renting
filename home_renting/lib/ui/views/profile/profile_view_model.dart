@@ -19,6 +19,13 @@ class ProfileViewModel extends BasedViewModel {
   num availableLenght = 0;
   List<Property> availableList = [];
 
+  Future signOut() async {
+    setBusy(true);
+    await _authenticationService.signOut();
+    navigateToLogin();
+    setBusy(false);
+  }
+
   num unAvailablePrice = 0;
   num unAvailableLenght = 0;
   List<Property> unAvailableList = [];
@@ -33,7 +40,7 @@ class ProfileViewModel extends BasedViewModel {
   String choice = categories[0];
 
   Future<void> getser() async {
-   final user = _authenticationService.currentUser;
+    final user = _authenticationService.currentUser;
     userName = user.fullname;
     userRole = user.userRole;
     notifyListeners();
@@ -79,8 +86,7 @@ class ProfileViewModel extends BasedViewModel {
     _navigationService.navigateTo(Routes.aboutView);
   }
 
-  void navigateToDetailView(Property home) {
-    // _navigationService.navigateTo(Routes.detailView,
-    //     arguments: DetailViewArguments(property: home));
+  void navigateToLogin() {
+    _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
   }
 }

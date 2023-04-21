@@ -39,6 +39,6 @@ class LoginViewModel extends BaseViewModel {
   }
 
    void navigateToHomeView() {
-    _navigationService.clearStackAndShow(Routes.home);
+    _navigationService.clearStackAndShow(Routes.mainView);
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:home_renting/admin/create_rent/add_propert.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/main_view/widgets/custom_fab.dart';
 import 'package:home_renting/ui/views/profile/profile.dart';
-
 
 class MainView extends StatefulWidget {
   const MainView({Key? key, this.title}) : super(key: key);
@@ -15,10 +15,7 @@ class MainView extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MainView> with TickerProviderStateMixin {
-  final pages = const <Widget>[
-    Home(),
-    ProfileView()
-  ];
+  final pages = const <Widget>[Home(), ProfileView()];
 
   Widget _lastSelected = const Home();
 
@@ -32,7 +29,6 @@ class MyHomePageState extends State<MainView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _lastSelected,
-
       bottomNavigationBar: FABBottomAppBar(
         centerItemText: "",
         color: Colors.grey,
@@ -50,9 +46,15 @@ class MyHomePageState extends State<MainView> with TickerProviderStateMixin {
         elevation: 4.0,
         icon: const Icon(Icons.add),
         label: const Text('Add Property'),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => AddPropertView(),
+            ),
+          );
+        },
       ),
-
     );
   }
 }

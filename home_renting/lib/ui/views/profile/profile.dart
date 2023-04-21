@@ -81,6 +81,7 @@ class ProfileView extends StatelessWidget {
                             height: 25.h,
                           ),
                           GestureDetector(
+                            onTap: model.signOut,
                             child: Row(
                               children: [
                                 Container(
