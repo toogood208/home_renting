@@ -7,12 +7,19 @@ import 'package:home_renting/ui/base_view_model.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class DetailViewModel extends BasedViewModel {
-  final socialService = locator<SocialShareService>();
+  final _socialService = locator<SocialShareService>();
   final _firestoreService = locator<FireStoreService>();
   final _dialogservice = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
 
   final log = getLogger("DetailViewModel");
+
+  void socialShare({required Shares share, required Property property}){
+    setBusy(true);
+    _socialService.tapShare(
+      share: share, property: property,);
+    setBusy(false);
+  }
 
   Future updateProperty(Property property) async {
     setBusy(true);

@@ -8,7 +8,7 @@ import 'package:home_renting/ui/base_view_model.dart';
 
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends BasedViewModel {
+class  HomeViewModel extends BasedViewModel {
   final _navigationService = locator<NavigationService>();
   final FireStoreService _firestoreService = locator<FireStoreService>();
   final _log = getLogger("HomeViewModel");

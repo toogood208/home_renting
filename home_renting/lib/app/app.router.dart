@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// StackedRouterGenerator
+// StackedNavigatorGenerator
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
@@ -202,6 +202,22 @@ class DetailViewArguments {
   final _i13.Key? key;
 
   final _i14.Property property;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "property": "$property"}';
+  }
+
+  @override
+  bool operator ==(covariant DetailViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.property == property;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ property.hashCode;
+  }
 }
 
 class AddPropertViewArguments {
@@ -213,6 +229,22 @@ class AddPropertViewArguments {
   final _i13.Key? key;
 
   final _i14.Property? property;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "property": "$property"}';
+  }
+
+  @override
+  bool operator ==(covariant AddPropertViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.property == property;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ property.hashCode;
+  }
 }
 
 class MainViewArguments {
@@ -224,6 +256,22 @@ class MainViewArguments {
   final _i13.Key? key;
 
   final String? title;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "title": "$title"}';
+  }
+
+  @override
+  bool operator ==(covariant MainViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.title == title;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ title.hashCode;
+  }
 }
 
 extension NavigatorStateExtension on _i15.NavigationService {

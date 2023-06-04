@@ -31,8 +31,9 @@ class MyApp extends StatelessWidget {
               const AppBarTheme(iconTheme: IconThemeData(color: Colors.black)),
           primarySwatch: Colors.blue,
         ),
-       navigatorKey: StackedService.navigatorKey,
-        onGenerateRoute: StackedRouter().onGenerateRoute,
+     navigatorKey: StackedService.navigatorKey,
+     onGenerateRoute: StackedRouter().onGenerateRoute,
+       
       );
     });
   }

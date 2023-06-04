@@ -1,5 +1,6 @@
 import 'package:home_renting/admin/create_rent/add_propert.dart';
 import 'package:home_renting/admin/property_list/property_list_view.dart';
+import 'package:home_renting/core/services/api_service.dart';
 import 'package:home_renting/core/services/authentication_service.dart';
 import 'package:home_renting/core/services/cloud_storage_service.dart';
 import 'package:home_renting/core/services/firestore_service.dart';
@@ -33,10 +34,12 @@ import 'package:stacked_services/stacked_services.dart';
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),
+  LazySingleton(classType: SnackbarService),
 
   // Utils
   LazySingleton(classType: ImageSelectorservice),
   LazySingleton(classType: SocialShareService),
+  LazySingleton(classType: ApiService),
 
    // local storage
     Presolve(

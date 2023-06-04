@@ -1,10 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter_share_me/flutter_share_me.dart';
+import 'package:home_renting/app/app.locator.dart';
 import 'package:home_renting/app/app.logger.dart';
 import 'package:home_renting/core/models/property.dart';
+import 'package:home_renting/core/services/api_service.dart';
+import 'package:share_plus/share_plus.dart';
 
-enum Share {
+enum Shares {
   facebook,
   messenger,
   twitter,
@@ -13,16 +14,20 @@ enum Share {
   whatsappBusiness,
   shareSystem,
   shareInstagram,
-  shareTelegram
+  shareTelegram,
+  shareAll,
 }
 
 class SocialShareService {
   final log = getLogger("SocialShareService");
   String? response;
   final FlutterShareMe flutterShareMe = FlutterShareMe();
+  final _api = locator<ApiService>();
 
-  Future<void> tapShare(
-      {required Share share, required Property property, File? file}) async {
+  Future<void> tapShare({
+    required Shares share,
+    required Property property,
+  }) async {
     final String message = """
           ${property.name}
           ${property.description}
@@ -30,42 +35,48 @@ class SocialShareService {
           ${property.price}
           ${property.numberOfBathroom}, Bathrooms
           ${property.address}
+         
 """;
+    final path = await _api.downloadImage(property);
+
     switch (share) {
-      case Share.facebook:
+      case Shares.facebook:
         response = await flutterShareMe.shareToFacebook(msg: message);
         break;
-      case Share.messenger:
+      case Shares.messenger:
         response = await flutterShareMe.shareToMessenger(msg: message);
         break;
-      case Share.twitter:
-        response = await flutterShareMe.shareToTwitter(msg: message);
+      case Shares.twitter:
+        response = await flutterShareMe.shareToTwitter(
+          msg: message,
+        );
         break;
-      case Share.whatsapp:
-        if (file != null) {
-          response = await flutterShareMe.shareToWhatsApp(
-              imagePath: file.path, fileType: FileType.image);
-        } else {
-          response = await flutterShareMe.shareToWhatsApp(msg:message);
-        }
+      case Shares.whatsapp:
+        response = await flutterShareMe.shareToWhatsApp(
+            msg: message, imagePath: path!, fileType: FileType.image);
         break;
-      case Share.whatsappBusiness:
-        response = await flutterShareMe.shareToWhatsApp(msg: message);
+      case Shares.whatsappBusiness:
+        response = await flutterShareMe.shareToWhatsApp4Biz(
+            msg: message, imagePath: path!);
         break;
-      case Share.shareSystem:
+      case Shares.shareSystem:
         response = await flutterShareMe.shareToSystem(msg: message);
         break;
-      case Share.whatsappPersonal:
+      case Shares.whatsappPersonal:
         response = await flutterShareMe.shareWhatsAppPersonalMessage(
             message: message, phoneNumber: '+234$property');
         break;
-      case Share.shareInstagram:
+      case Shares.shareInstagram:
         response = await flutterShareMe.shareToInstagram(
-            filePath: file!.path, fileType: FileType.image);
+            filePath: path!, fileType: FileType.image);
         break;
-      case Share.shareTelegram:
-        response = await flutterShareMe.shareToTelegram(msg:message);
+      case Shares.shareTelegram:
+        response = await flutterShareMe.shareToTelegram(msg: message);
         break;
+      case Shares.shareAll:
+        await Share.shareXFiles([
+          XFile(path!),
+        ], text: message, subject: property.name);
     }
     log.v(response);
   }

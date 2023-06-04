@@ -16,6 +16,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: true,
       backgroundColor: kappBackgeroundColor,
       title: Text(title, style: appTitletextStyle),
+        iconTheme: const IconThemeData(
+        color: Colors.black,
+      ),
       centerTitle: true,
       actions: actions,
       elevation: 0,

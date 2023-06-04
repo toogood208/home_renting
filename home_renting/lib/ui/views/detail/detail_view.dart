@@ -6,6 +6,7 @@ import 'package:home_renting/core/services/social_share_service.dart';
 import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/shared/text_styles.dart';
 import 'package:home_renting/ui/views/detail/detail_view_model.dart';
+import 'package:home_renting/ui/widgets/app_spinner.dart';
 import 'package:home_renting/ui/widgets/custom_button.dart';
 import 'package:stacked/stacked.dart';
 
@@ -33,135 +34,104 @@ class DetailView extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 24),
-                    SizedBox(
-                      width: 335,
-                      child: Column(
+                child: model.isBusy
+                    ? const Center(
+                        child: AppSpinner(),
+                      )
+                    : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            width: 335,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Description",
+                                  style: nearYouTextStyle,
+                                ),
+                                const SizedBox(height: 20),
+                                Text(
+                                  property.description,
+                                  style: searchHintTextStyle,
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Utilities",
+                                style: nearYouTextStyle,
+                              ),
+                              const SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${property.numberOfBedrooms} Bedroom(s)",
+                                    style: searchHintTextStyle,
+                                  ),
+                                  Text(
+                                    "${property.numberOfBathroom} Bathroom(s)",
+                                    style: searchHintTextStyle,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 32),
                           Text(
-                            "Description",
+                            "Share",
                             style: nearYouTextStyle,
                           ),
                           const SizedBox(height: 20),
-                          Text(
-                            property.description,
-                            style: searchHintTextStyle,
-                          )
+                          IconButton(
+                            onPressed: () {
+                              model.socialShare(
+                                share: Shares.shareAll,
+                                property: property,
+                              );
+                            },
+                            icon: const FaIcon(
+                              Icons.share_sharp,
+                              color: Colors.purpleAccent,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Price",
+                                style: nearYouTextStyle,
+                              ),
+                              const SizedBox(height: 20),
+                              Text(
+                                "NGN${property.price} / Year",
+                                style: searchHintTextStyle,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 32),
+                          CustomButton(
+                            busy: model.isBusy,
+                            title: "Rent",
+                            onTap: () {
+                              model.updateProperty(property);
+                            },
+                          ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Utilities",
-                          style: nearYouTextStyle,
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${property.numberOfBedrooms} Bedroom(s)",
-                              style: searchHintTextStyle,
-                            ),
-                            Text(
-                              "${property.numberOfBathroom} Bathroom(s)",
-                              style: searchHintTextStyle,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 32),
-                    Text(
-                      "Share",
-                      style: nearYouTextStyle,
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            model.socialService.tapShare(
-                                share: Share.whatsapp, property: property,);
-                          },
-                          icon: const FaIcon(
-                            FontAwesomeIcons.whatsapp,
-                            color: Colors.greenAccent,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            model.socialService.tapShare(
-                                share: Share.facebook, property: property,);
-                          },
-                          icon: const FaIcon(
-                            FontAwesomeIcons.facebook,
-                            color: Colors.blueAccent,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            model.socialService.tapShare(
-                                share: Share.twitter, property: property,);
-                          },
-                          icon: const FaIcon(
-                            FontAwesomeIcons.twitter,
-                            color: Colors.blueAccent,
-                          ),
-                        ),
-                         IconButton(
-                          onPressed: () {
-                            model.socialService.tapShare(
-                                share: Share.shareSystem, property: property,);
-                          },
-                          icon: const FaIcon(
-                            Icons.share_sharp,
-                            color: Colors.purpleAccent,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Price",
-                          style: nearYouTextStyle,
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          "NGN${property.price} / Year",
-                          style: searchHintTextStyle,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 32),
-                    CustomButton(
-                    busy: model.isBusy,
-                    title: "Rent",
-                    onTap: () {
-                      model.updateProperty(
-                      property
-                      );
-                    },
-                  ),
-                  ],
-                ),
               ),
             )
           ],

@@ -9,15 +9,15 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SettingsViewModel>.reactive(
-      builder: (context, model, child) => Scaffold(
-        appBar: const CustomAppBar(title: "Settings"),
+      builder: (context, model, child) => const Scaffold(
+        appBar: CustomAppBar(title: "Settings"),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   SizedBox(height: 16.0),
                   Text(
                     'APP SETTINGS',

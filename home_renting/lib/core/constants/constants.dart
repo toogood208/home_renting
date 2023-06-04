@@ -1,8 +1,9 @@
- const List<String> categories = [
-    "All",
-    "Self Contain",
-    "Bedroom Flat",
-    "Duplex",
-    "WareHouse",
-    "Office Space",
-  ];
+const List<String> categories = [
+  "All",
+  "Self Contain",
+  "Flat",
+  "Bungalow",
+  "Duplex",
+  "WareHouse",
+  "Office Space",
+];

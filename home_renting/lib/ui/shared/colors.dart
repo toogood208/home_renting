@@ -20,6 +20,7 @@ const neutralColor = MaterialColor(0xFF4B4B4B, {
   800: Color(0xFF292929),
   900: Color(0xFF202020),
 });
+const kPrimary2 = Color(0XFFFF8c01);
 
 const primaryColor = MaterialColor(0xFF2563EB, {
   50: Color(0xFFE9EFFD),
@@ -36,8 +37,8 @@ const primaryColor = MaterialColor(0xFF2563EB, {
 
 const errorColor = MaterialColor(0xFFBA0000, {
   50: Color(0xFFF8E6E6),
-  100:  Color(0xFFEAB0B0),
-  300:  Color(0xFFD15454),
+  100: Color(0xFFEAB0B0),
+  300: Color(0xFFD15454),
   200: Color(0xFFDF8A8A),
   400: Color(0xFFC83333),
   500: Color(0xFFBA0000),

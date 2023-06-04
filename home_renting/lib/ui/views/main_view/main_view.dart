@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_renting/admin/create_rent/add_propert.dart';
+import 'package:home_renting/ui/shared/colors.dart';
 import 'package:home_renting/ui/views/home/home_view.dart';
 import 'package:home_renting/ui/views/main_view/widgets/custom_fab.dart';
 import 'package:home_renting/ui/views/profile/profile.dart';
@@ -32,7 +33,7 @@ class MyHomePageState extends State<MainView> with TickerProviderStateMixin {
       bottomNavigationBar: FABBottomAppBar(
         centerItemText: "",
         color: Colors.grey,
-        selectedColor: Colors.blue,
+        selectedColor: kPrimary2,
         notchedShape: null,
         onTabSelected: _selectedTab,
         items: [
@@ -43,6 +44,7 @@ class MyHomePageState extends State<MainView> with TickerProviderStateMixin {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: kPrimary2,
         elevation: 4.0,
         icon: const Icon(Icons.add),
         label: const Text('Add Property'),

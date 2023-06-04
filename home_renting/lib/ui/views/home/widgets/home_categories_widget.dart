@@ -26,7 +26,7 @@ class HomeCategoryWidget extends ViewModelWidget<HomeViewModel> {
                         ? categorySelectedStyle
                         : searchHintTextStyle,
                     backgroundColor: kgreyColor,
-                    selectedColor: kcategoryBackgroundColor,
+                    selectedColor: kPrimary2,
                     selected: viewModel.selectedTypeindex == index,
                     onSelected: (value) {
                       viewModel.selectChips(value, index);
